@@ -33,6 +33,25 @@ nums[i] is either 0 or 1.
 
 
 function longestSubarray(nums: number[]): number {
-    return 0
+    let k = 1
+    // pointers
+    let rightPointer = 0
+    let leftPointer = 0
+    let maxWindowLength = 0
+
+    for (; rightPointer < nums.length; rightPointer++) {
+        if (nums[rightPointer] === 0) {
+            k--
+        }
+        if (k < 0) {
+            if (nums[leftPointer] === 0) {
+                k++
+            }
+            leftPointer++
+        }
+        maxWindowLength = Math.max(maxWindowLength, leftPointer - rightPointer + 1)
+    }
+    return maxWindowLength
 };
+
 export { longestSubarray as solution };
