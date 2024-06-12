@@ -44,4 +44,11 @@ describe("1004-max-consecutive-ones-III", () => {
         expect(result).toBe(10);
     });
 
+    test("Input3: nums = [1,1,1,0,0,0,0,0,0], k = 1 ", () => {
+        const nums = [1, 1, 1, 0, 0, 0, 0, 0, 0]
+        const k = 1;
+        const result = solution(nums, k);
+        expect(result).toBe(4);
+    });
+
 });
