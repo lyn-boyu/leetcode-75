@@ -1,7 +1,8 @@
 /*
 
 1004. Max Consecutive Ones III Medium
-Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
+Given a binary array nums and an integer k, 
+return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
 
 Example 1:
 
@@ -27,8 +28,25 @@ nums[i] is either 0 or 1.
 
 
 function longestOnes(nums: number[], k: number): number {
-    return 0 as number
-};
 
+    let leftPointer = 0;
+    let rightPointer = 0;
+    let maxWindowLength = 0;
+
+    for (; rightPointer < nums.length; rightPointer++) {
+        if (nums[rightPointer] === 0) {
+            k--;
+        }
+        if (k < 0) {
+            if (nums[leftPointer] === 0) {
+                k++;
+            }
+            leftPointer++;
+        }
+        maxWindowLength = Math.max(maxWindowLength, rightPointer - leftPointer +1);
+    };
+
+    return maxWindowLength
+}
 
 export { longestOnes as solution };
