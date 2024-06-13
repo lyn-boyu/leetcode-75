@@ -49,9 +49,10 @@ function longestSubarray(nums: number[]): number {
             }
             leftPointer++
         }
-        maxWindowLength = Math.max(maxWindowLength, leftPointer - rightPointer + 1)
+        maxWindowLength = Math.max(maxWindowLength, rightPointer - leftPointer + 1)
     }
-    return maxWindowLength
+    // must delete one element.
+    return maxWindowLength - 1
 };
 
 export { longestSubarray as solution };
