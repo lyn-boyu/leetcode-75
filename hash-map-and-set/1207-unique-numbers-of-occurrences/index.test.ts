@@ -39,7 +39,7 @@ describe("1207. Unique Number of Occurrences - Easy ", () => {
     });
 
     test("Input2: arr = [1,2] ", () => {
-        let arr = [1, 2, 2, 1, 1, 3]
+        let arr = [1, 2]
         const result = solution(arr);
         expect(result).toEqual(false);
     });
