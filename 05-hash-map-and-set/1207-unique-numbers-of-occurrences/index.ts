@@ -27,7 +27,13 @@ Constraints:
 */
 
 function uniqueOccurrences(arr: number[]): boolean {
-    return false
+    let occurrenceMap = new Map();
+    arr.forEach((num) => {
+        occurrenceMap.set(num, (occurrenceMap.get(num) ?? 0) + 1)
+    })
+    const mapValues = Array.from(occurrenceMap.values())
+    const uniqueValues = new Set(mapValues)
+    return uniqueValues.size === mapValues.length
 };
 
 export { uniqueOccurrences as solution };
