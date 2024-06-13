@@ -28,8 +28,14 @@ n == gain.length
 
 */
 
-function largestAltitude(gain: number[]): number {
-    return 0
+function largestAltitude(gains: number[]): number {
+    let maxAltitude = 0;
+    gains.reduce((currentAltitude, gain) => {
+        currentAltitude += gain;
+        maxAltitude = Math.max(maxAltitude, currentAltitude);
+        return currentAltitude
+    }, 0)
+    return maxAltitude
 };
 
 
