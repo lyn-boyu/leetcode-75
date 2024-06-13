@@ -45,7 +45,51 @@ n == grid.length == grid[i].length
 */
 
 function equalPairs(grid: number[][]): number {
-    return 0
+    // we can use two hashmap to store the rows and columns
+    // the key is contact the value of the row or column
+    // the value is a array that store the index of the row or column
+    // then we can calculate the number of pairs by iterating the hashmap
+
+    function buildRowMap(grid: number[][]) {
+        const map = new Map<string, number[]>();
+        grid.forEach((row, idx) => {
+            const key = row.join(',');
+            const value = map.get(key) ?? []
+            value.push(idx)
+            map.set(key, value);
+        });
+        return map;
+    }
+
+    function buildColMap(grid: number[][]) {
+        const map = new Map<string, number[]>();
+        const [firstRow] = grid;
+        (firstRow ?? []).forEach((_, idx) => {
+            let keys = [] as number[];
+            grid.forEach((row, i) => {
+                keys.push(row[idx]);
+            })
+            const key = keys.join(',');
+            const value = map.get(key) ?? []
+            value.push(idx)
+            map.set(key, value);
+        })
+        return map;
+    }
+
+    const rowMap = buildRowMap(grid);
+    const colMap = buildColMap(grid);
+
+    let pairCount = 0;
+
+    Array.from(rowMap.entries()).forEach(([rowKey, rowValue]) => {
+        const colValue = colMap.get(rowKey)
+        if (colValue) {
+            pairCount += (rowValue.length * colValue.length)
+        }
+    })
+
+    return pairCount
 };
 
 export { equalPairs as solution };

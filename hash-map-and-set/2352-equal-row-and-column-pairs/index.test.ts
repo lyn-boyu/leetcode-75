@@ -63,4 +63,11 @@ describe("2352. Equal Row and Column Pairs - Medium", () => {
         expect(result).toEqual(3);
     });
 
+    test("Input2: grid = [[11,1],[1,11]] ", () => {
+        let grid = [[11, 1], [1, 11]]
+        const result = solution(grid);
+        // [ 0, 1 ] [ 0, 1 ] 4
+        expect(result).toEqual(2);
+    });
+
 });
