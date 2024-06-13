@@ -34,7 +34,7 @@ import { expect, test, describe } from "bun:test";
 import { solution } from './index'
 
 describe("1493. Longest Subarray of 1's After Deleting One Element - Medium", () => {
-
+    
     test("Input1: nums = [1,1,0,1] ", () => {
         const nums = [1, 1, 0, 1]
         const result = solution(nums);
@@ -51,5 +51,11 @@ describe("1493. Longest Subarray of 1's After Deleting One Element - Medium", ()
         const nums = [1, 1, 1]
         const result = solution(nums);
         expect(result).toBe(2);
+    });
+
+    test("Input4: nums = [1,1,0,1] ", () => {
+        const nums = [1, 1, 0, 1]
+        const result = solution(nums);
+        expect(result).toBe(3);
     });
 });
