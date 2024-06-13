@@ -42,7 +42,22 @@ Constraints:
 */
 
 function pivotIndex(nums: number[]): number {
-    return 0
+    let pivotPointer = 0
+    let leftSum = 0
+
+    const sum = nums.reduce((acc, num) => acc + num, 0)
+    for (; pivotPointer <= nums.length; pivotPointer++) {
+
+        // note: leftSum is the sum of all elements to the left of the pivotPointer
+        leftSum = leftSum + (nums[pivotPointer - 1] ?? 0)
+        //  note: rightSum is the sum of all elements to the right of the pivotPointer
+        const rightSum = sum - leftSum - nums[pivotPointer]
+
+        if (leftSum === rightSum) {
+            return pivotPointer
+        }
+    }
+    return -1
 };
 
 
