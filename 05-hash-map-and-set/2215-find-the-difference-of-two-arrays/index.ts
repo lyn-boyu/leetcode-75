@@ -31,7 +31,29 @@ Constraints:
 
 
 function findDifference(nums1: number[], nums2: number[]): number[][] {
-    return []
+    // prepare two sets, one for each array, to store unique numbers, this can reduce the time complexity to O(n)
+    let set1 = new Set(nums1);
+    let set2 = new Set(nums2);
+    // iterate over the first set and check if the element is in the second set, do the same for the second set
+    const uniqueNumsInSet1 = [] as number[];
+    const uniqueNumsInSet2 = [] as number[];
+
+    // the time complexity set.forEach() is O(n)
+    set1.forEach((num) => {
+        // the time complexity of has() is O(1)
+        if (!set2.has(num)) {
+            uniqueNumsInSet1.push(num);
+        }
+    });
+    // the time complexity set.forEach() is O(n)
+    set2.forEach((num) => {
+        // the time complexity of has() is O(1)
+        if (!set1.has(num)) {
+            uniqueNumsInSet2.push(num);
+        }
+    });
+
+    return [uniqueNumsInSet1, uniqueNumsInSet2]
 };
 
 
