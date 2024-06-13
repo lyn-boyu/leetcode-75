@@ -44,7 +44,40 @@ word1 and word2 contain only lowercase English letters.
 */
 
 function closeStrings(word1: string, word2: string): boolean {
-    return false
+    // the letter position of the word can be different
+    // but the element of the word should be the same
+    // and the element occurrence size sum should be the same
+    if (word1.length !== word2.length) return false;
+
+    function buildWordMap(word: string): Map<string, number> {
+        const wordMap = new Map();
+        word.split('').forEach((char) => {
+            wordMap.set(char, (wordMap.get(char) || 0) + 1);
+        })
+        return wordMap
+    }
+    const wordMap1 = buildWordMap(word1)
+    const wordMap2 = buildWordMap(word2)
+
+    // check the elements of the word should be the same
+    let isAnyLetterDifferent = false
+    wordMap1.forEach((value, key) => {
+        if (!wordMap2.has(key)) { isAnyLetterDifferent = true; }
+    })
+    wordMap2.forEach((value, key) => {
+        if (!wordMap1.has(key)) { isAnyLetterDifferent = true; }
+    })
+    if (isAnyLetterDifferent) return false
+
+
+    // check the element of the word should be the same
+    const wordOneFrequence = [...wordMap1.values()].sort((a, b) => a - b)
+    const wordTwoFrequence = [...wordMap2.values()].sort((a, b) => a - b)
+
+    return wordOneFrequence.reduce((result, value, idx) => {
+        if (!result) return result
+        return value === wordTwoFrequence[idx]
+    }, true)
 };
 export { closeStrings as solution };
 

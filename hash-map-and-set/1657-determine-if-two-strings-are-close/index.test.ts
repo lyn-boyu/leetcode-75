@@ -15,7 +15,6 @@ You can use the operations on either string as many times as necessary.
 Given two strings, word1 and word2, return true if word1 and word2 are close, and false otherwise.
 
  
-
 Example 1:
 Input: word1 = "abc", word2 = "bca"
 Output: true
@@ -64,6 +63,18 @@ describe("1657. Determine if Two Strings Are Close - Medium ", () => {
         let word1 = "cabbba", word2 = "abbccc";
         const result = solution(word1, word2);
         expect(result).toEqual(true);
+    });
+
+    test("Input4: word1 = \"abbzzca\", word2 = \"babzzcz\" ", () => {
+        let word1 = "abbzzca", word2 = "babzzcz";
+        const result = solution(word1, word2);
+        expect(result).toEqual(false);
+    });
+
+    test("Input5: word1 = \"uau\", word2 = \"ssx\" ", () => {
+        let word1 = "uau", word2 = "ssx";
+        const result = solution(word1, word2);
+        expect(result).toEqual(false);
     });
 
 });
