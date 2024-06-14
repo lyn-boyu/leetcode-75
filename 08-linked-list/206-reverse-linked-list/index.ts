@@ -28,11 +28,38 @@ Follow up: A linked list can be reversed either iteratively or recursively. Coul
 import type { ListNode } from "../utils";
 
 export function reverseListIterative(head: ListNode | null): ListNode | null {
-    return null
+    let prevNode = null
+    let currentNode = head
+    
+    while (currentNode) {
+        // save the next node reference
+        const nextNode = currentNode.next
+        // reverse the link
+        currentNode.next = prevNode
+        // move to the next node
+        prevNode = currentNode
+        // move to the next node
+        currentNode = nextNode
+    }
+    // return the new head
+    return prevNode
 };
 
 export function reverseListRecursive(head: ListNode | null): ListNode | null {
-    return null
+
+    function reverse(node: ListNode | null, prevNode: ListNode | null) {
+        if (node === null) {
+            return prevNode
+        }
+        // save the next node
+        const nextNode = node.next
+        // reverse the link
+        node.next = prevNode
+        // move to the next node
+        return reverse(nextNode, node)
+    }
+
+    return reverse(head, null)
+
 };
 
- 
