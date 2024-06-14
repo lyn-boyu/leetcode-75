@@ -36,9 +36,6 @@ The operation above can be performed on s.
 */
 
 
-
-
-
 import { expect, test, describe } from "bun:test";
 import { solution } from './index'
 

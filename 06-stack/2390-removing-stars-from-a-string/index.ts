@@ -37,7 +37,16 @@ The operation above can be performed on s.
 
 
 function removeStars(s: string): string {
-    return ''
+    const input = s.split('');
+    const result = [];
+    for (let ele of input) {
+        if (ele === '*') {
+            result.pop();
+        } else {
+            result.push(ele);
+        }
+    }
+    return result.join('');
 };
 
 export { removeStars as solution };
