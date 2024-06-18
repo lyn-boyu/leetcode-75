@@ -36,9 +36,48 @@ asteroids[i] != 0
 
 
 
-
 function asteroidCollision(asteroids: number[]): number[] {
-    return []
+    const resultStack = [] as number[];
+    for (let ele of asteroids) {
+
+        let hasCollision = true;
+
+        resultStack.push(ele)
+
+        while (hasCollision === true) {
+            // if there is only one element in the result stack then break the loop
+            if (resultStack.length === 1) {
+                break
+            }
+
+            // get the last two elements from the result stack
+            const incoming = resultStack.pop()!
+            const last = resultStack.pop()!
+
+            // evaluate if the last element and the incoming element are in the same direction 
+            const isSameDirection = last > 0 && incoming > 0 || last < 0 && incoming < 0
+            // when last > 0 && incoming < 0 || last < 0 && incoming > 0 there is a collision
+            hasCollision = !isSameDirection && last > 0 && incoming < 0
+
+            // if there is a collision
+            if (hasCollision) {
+                // if asteroids has equal size then remove bo   th elements
+                if (Math.abs(last) === Math.abs(incoming)) {
+                    break
+                }
+                // if there is a collision then keep the bigger one
+                const winner = Math.abs(last) > Math.abs(incoming) ? last : incoming
+                resultStack.push(winner)
+            }
+
+            // if last two asteroids are in the same direction then keep them both
+            if (!hasCollision) {
+                resultStack.push(last)
+                resultStack.push(incoming)
+            }
+        }
+    }
+    return resultStack
 };
 
 export { asteroidCollision as solution };

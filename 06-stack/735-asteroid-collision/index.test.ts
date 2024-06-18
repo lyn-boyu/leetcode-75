@@ -66,4 +66,5 @@ describe("735. Asteroid Collision - Medium", () => {
         const result = solution(asteroids);
         expect(result).toEqual([-2, -1, 1, 2]);
     });
+    
 });
