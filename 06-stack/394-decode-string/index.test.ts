@@ -41,6 +41,12 @@ import { solution } from './index'
 
 describe("394. Decode String - Medium", () => {
 
+    test("Input0: arr = \"3[abc]\" ", () => {
+        let s = "3[abc]"
+        const result = solution(s);
+        expect(result).toEqual("abcabcabc");
+    });
+
     test("Input1: arr = \"3[a]2[bc]\" ", () => {
         let s = "3[a]2[bc]"
         const result = solution(s);
@@ -59,6 +65,16 @@ describe("394. Decode String - Medium", () => {
         expect(result).toEqual("abcabccdcdcdef");
     });
 
-
+    test("Input4: arr = \"3[a2[b]c]\" ", () => {
+        let s = "3[a2[b]c]"
+        const result = solution(s);
+        expect(result).toEqual("abbcabbcabbc");
+    });
+    
+    test("Input5: arr = \"2[a2[b2[c]]]\" ", () => {
+        let s = "2[a2[b2[c]]]"
+        const result = solution(s);
+        expect(result).toEqual("abccbccabccbcc");
+    });
 
 });
