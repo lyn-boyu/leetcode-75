@@ -55,10 +55,15 @@ describe("735. Asteroid Collision - Medium", () => {
         expect(result).toEqual([]);
     });
 
-    test("Input2: asteroids = [10,2,-5] ", () => {
+    test("Input3: asteroids = [10,2,-5] ", () => {
         let asteroids = [10, 2, -5]
         const result = solution(asteroids);
         expect(result).toEqual([10]);
     });
 
+    test("Input4: asteroids = [-2,-1,1,2] ", () => {
+        let asteroids = [-2, -1, 1, 2]
+        const result = solution(asteroids);
+        expect(result).toEqual([-2, -1, 1, 2]);
+    });
 });
