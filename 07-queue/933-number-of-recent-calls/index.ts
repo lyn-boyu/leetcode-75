@@ -45,16 +45,34 @@ expect(recentCounter.ping(100)).toEqual(2);
 expect(recentCounter.ping(3001)).toEqual(3);
 // requests = [1, 100, 3001, 3002], range is [2,3002], return 3
 expect(recentCounter.ping(3002)).toEqual(3);
+
+
+const recentCounter = new RecentCounter();
+// requests = [642] return 1
+expect(recentCounter.ping(642)).toEqual(1);
+// requests = [642, 1849] return 2
+expect(recentCounter.ping(1849)).toEqual(2);
+// requests = [642, 1849, 4921],return 1
+expect(recentCounter.ping(4921)).toEqual(1);
+// requests = [642, 1849, 4921, 5936], return 2
+expect(recentCounter.ping(5936)).toEqual(2);
+// requests = [642, 1849, 4921, 5936, 5957], return 3
+expect(recentCounter.ping(5957)).toEqual(3);
 */
 
+
+
 export class RecentCounter {
-    constructor() {
+    private requests: number[] = [];
+    private timeFrame: number = 3000;
 
-    }
+    ping = (currentTime: number): number => {
+        this.requests.push(currentTime);
+        // check the head of queue
+        while (this.requests[0] < currentTime - this.timeFrame) {
+            this.requests.shift();
+        }
 
-    ping(t: number): number {
-        return 0;
+        return this.requests.length
     }
 }
-
-
