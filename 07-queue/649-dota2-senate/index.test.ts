@@ -53,19 +53,35 @@ senate[i] is either 'R' or 'D'.
  */
 
 import { expect, test, describe } from "bun:test";
-import { solution } from './index'
+import { solution1, solution2 } from './index'
 
 describe("649. Dota2 Senate - Medium", () => {
 
     test("Input1: RD ", () => {
         let s = "RD"
-        const result = solution(s);
+        const result = solution1(s);
         expect(result).toEqual("Radiant");
     });
 
     test("Input2: RDD", () => {
         let s = "RDD"
-        const result = solution(s);
+        const result = solution1(s);
+        expect(result).toEqual("Dire");
+    });
+
+});
+
+describe("649. Dota2 Senate - Medium for solution2", () => {
+
+    test("Input1: RD ", () => {
+        let s = "RD"
+        const result = solution2(s);
+        expect(result).toEqual("Radiant");
+    });
+
+    test("Input2: RDD", () => {
+        let s = "RDD"
+        const result = solution2(s);
         expect(result).toEqual("Dire");
     });
 

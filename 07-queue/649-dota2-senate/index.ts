@@ -53,8 +53,65 @@ senate[i] is either 'R' or 'D'.
  */
 
 
-function predictPartyVictory(senate: string): string {
-    return ''
-};
+export function solution1(senate: string): string {
 
-export { predictPartyVictory as solution }
+    const rTeam: number[] = []
+    const dTeam: number[] = []
+    const roundLength = senate.length
+
+    for (let i = 0; i < senate.length; i++) {
+        if (senate[i] === 'R') {
+            rTeam.push(i)
+        } else {
+            dTeam.push(i)
+        }
+    }
+
+    // pk 
+    while (rTeam.length > 0 && dTeam.length > 0) {
+        // the smaller index will be the one who can ban the other, so we will remove the other and move the senator to the end of the queue
+        if (rTeam[0] < dTeam[0]) {
+            // roundLength helps to judge who is the next senator
+            rTeam.push(rTeam.shift()! + roundLength)
+            // dTeam lose one
+            dTeam.shift()
+        } else {
+            // roundLength helps to judge who is the next senator
+            dTeam.push(dTeam.shift()! + roundLength)
+            // rTeam lose one
+            rTeam.shift()
+        }
+    }
+
+    return rTeam.length > 0 ? 'Radiant' : 'Dire'
+}
+
+
+export function solution2(senate: string): string {
+    const queue = senate.split('')
+
+    while (true) {
+        // peak the current senator
+        const current = queue.shift()
+
+        const opositeIndex = queue.findIndex((el) => current === 'R' ? el === 'D' : el === 'R')
+
+        //  if there is no oposite senator then break the loop
+        if (opositeIndex === -1) {
+            queue.push(current!)
+            break
+        }
+
+        // ban the oposite senator
+        queue.splice(opositeIndex, 1)
+
+        // add the current senator to the end of the queue
+        queue.push(current!)
+    }
+
+    return queue[0] === 'R' ? 'Radiant' : 'Dire'
+
+}
+
+
+
