@@ -13,6 +13,17 @@ export class ListNode {
         this.next = (next === undefined ? null : next);
     }
 
+    //get length of the linked list
+    static length(head: ListNode | null): number {
+        let length = 0;
+        let current = head;
+        while (current) {
+            length++;
+            current = current.next;
+        }
+        return length;
+    }
+
     /**  createFromArray creates a linked list from an array of numbers */
     static createFromArray(arr: number[]): ListNode | null {
         if (arr.length === 0) return null;

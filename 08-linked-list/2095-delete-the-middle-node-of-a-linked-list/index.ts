@@ -40,7 +40,45 @@ import type { ListNode } from "../utils";
 
 
 function deleteMiddle(head: ListNode | null): ListNode | null {
-    return null
+    // * get the size of the linked list
+    let currentNode = head
+    let size = 0
+    while (currentNode !== null) {
+        size++
+        currentNode = currentNode!.next
+    }
+
+    // * get the middle node index
+    // For n = 1, 2, 3, 4, and 5, the middle nodes are 0, 1, 1, 2, and 2, respectively.
+    const middle = Math.floor(size / 2)
+
+    // reset the head
+    let prevNode = null
+    let index = 0
+    currentNode = head
+
+    while (currentNode !== null) {
+
+        if (index === middle) {
+            if (prevNode === null) {
+                return null
+            }
+            // skip current node
+            prevNode.next = currentNode.next ? currentNode.next : null
+            break
+        }
+
+        // increment the index
+        index++
+
+        // remember the previous node
+        prevNode = currentNode
+
+        // move to the next node
+        currentNode = currentNode.next
+    }
+
+    return head
 };
 
 export { deleteMiddle as solution };
