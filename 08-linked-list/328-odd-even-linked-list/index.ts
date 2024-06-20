@@ -29,11 +29,64 @@ The number of nodes in the linked list is in the range [0, 104].
 
 
 */
-import type { ListNode } from "../utils";
+import { ListNode } from "../utils";
 
 
+// iterate through the list
+// create oddList and evenList to keep track of the nodes
+// use current node to track the last node in the odd and even list
+// at the end of the iteration, append the evenList to the end of the oddList
+// connect the odd and even nodes
 function oddEvenList(head: ListNode | null): ListNode | null {
-    return null
+    let pointer = head
+    let oddList = null
+    let evenList = null
+    // create oddList and evenList to store different nodes
+    let currentOddNode = null
+    let prevOddNode = null
+    let currentEvenNode = null
+    let index = 0
+
+    while (pointer !== null) {
+        // use idx % 2 as the condition to divide list nodes into odd and even 
+        const isOdd = index % 2 === 0;
+        if (isOdd) {
+            if (currentOddNode === null) {
+                //  create a new node
+                oddList = new ListNode(pointer.val)
+                currentOddNode = oddList
+            } else {
+                //  append a new node to the current node
+                currentOddNode.next = new ListNode(pointer.val)
+                currentOddNode = currentOddNode ? currentOddNode.next : null
+            }
+
+        } else {
+            if (currentEvenNode === null) {
+                evenList = new ListNode(pointer.val)
+                currentEvenNode = evenList
+            } else {
+                currentEvenNode.next = new ListNode(pointer.val)
+                currentEvenNode = currentEvenNode ? currentEvenNode.next : null
+            }
+        }
+        // move to the next node
+        pointer = pointer.next
+        // move to the next index
+        index++
+    }
+
+    currentOddNode = oddList
+    while (currentOddNode) {
+        if (currentOddNode.next === null) {
+            currentOddNode!.next = evenList
+            break;
+        }
+        currentOddNode = currentOddNode.next
+    }
+
+
+    return oddList
 };
 
 export { oddEvenList as solution };
