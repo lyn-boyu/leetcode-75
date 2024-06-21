@@ -29,8 +29,31 @@ import type {
 } from "../../common/binary-tree";
 
 function maxDepth(root: TreeNode | null): number {
-    return 0
-};
+    function dfs(node: TreeNode | null, depth: number): number {
+        //  when reach the leaf node, return the parent depth
+        if (!node) return depth;
+        // get current Depth increase the depth by 1 
+        const currentDepth = depth + 1
+        // get the left and right depth
+        const left = dfs(node.left, currentDepth);
+        const right = dfs(node.right, currentDepth);
+        // return the max depth between left and right
+        return Math.max(left, right);
+    }
+    // start from the root node with depth 0
+    return dfs(root, 0);
+}
 
+function solution2(root: TreeNode | null): number {
+    //  when reach the leaf node, return 0
+    if (!root) return 0;
+    // get the left and right depth
+    const left = solution2(root.left);
+    const right = solution2(root.right);
+    // get the max depth between left and right
+    const maxChildDepth = Math.max(left, right);
+    // return the max depth between left and right plus 1 to get current depth
+    return maxChildDepth + 1;
+}
 
 export { maxDepth as solution };
