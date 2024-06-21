@@ -53,7 +53,7 @@ import { expect, test, describe } from "bun:test";
 import { solution } from './index'
 import { ListNode } from "../utils";
 
-describe("2095. Delete the Middle Node of a Linked List - Medium", () => {
+describe("2130. Maximum Twin Sum of a Linked List - Medium", () => {
 
     test("Input1: head =[5,4,2,1]", () => {
         const head = ListNode.createFromArray([5, 4, 2, 1]);
@@ -65,6 +65,12 @@ describe("2095. Delete the Middle Node of a Linked List - Medium", () => {
         const head = ListNode.createFromArray([4, 2, 2, 3]);
         const result = solution(head);
         expect(result).toEqual(7);
+    });
+
+    test("Input3: head =[1,100000]", () => {
+        const head = ListNode.createFromArray([1, 100000]);
+        const result = solution(head);
+        expect(result).toEqual(100001);
     });
 
 });
