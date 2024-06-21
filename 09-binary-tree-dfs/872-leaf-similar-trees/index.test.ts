@@ -50,5 +50,12 @@ describe("872. Leaf-Similar Trees - Easy", () => {
         expect(result).toEqual(false);
     });
 
+    test("Input3:root1 =[3,5,1,6,2,9,8,null,null,7,4], root2 = [3,5,1,6,7,4,2,null,null,null,null,null,null,9,11,null,null,8,10]", () => {
+        const root1 = BinaryTreeNode.createFromArray([3, 5, 1, 6, 2, 9, 8, null, null, 7, 4]);
+        const root2 = BinaryTreeNode.createFromArray([3, 5, 1, 6, 7, 4, 2, null, null, null, null, null, null, 9, 11, null, null, 8, 10]);
+        const result = solution(root1, root2);
+        expect(result).toEqual(false);
+    });
+
 
 });

@@ -34,7 +34,33 @@ import type {
 } from "../../common/binary-tree";
 
 function leafSimilar(root1: TreeNode | null, root2: TreeNode | null): boolean {
-    return false
+
+    // get the leaf sequence of the tree
+    function getLeafSequence(node: TreeNode | null, sequence: number[]) {
+        //  when the node is null, return the sequence
+        if (!node) return sequence
+        // when reach the leaf node, add the value to the sequence
+        if (!node.left && !node.right) {
+            sequence.push(node.val)
+        }
+
+        // process the child nodes
+        getLeafSequence(node.left, sequence)
+        getLeafSequence(node.right, sequence)
+
+        return sequence
+    }
+
+    // get the leaf sequence of the tree 1 and tree 2
+    const sequence1: number[] = getLeafSequence(root1, [])
+    const sequence2: number[] = getLeafSequence(root2, [])
+    console.log(sequence1, sequence2)
+    // if the length of the two sequences are different, return false
+    if (sequence1.length !== sequence2.length) return false
+    // compare the sequence of the two trees
+    return sequence1.every((value, index) => {
+        return value === sequence2[index]
+    })
 };
 
 
