@@ -1,7 +1,5 @@
 /**
  
-/**
- 
 1448. Count Good Nodes in Binary Tree - Medium
 
 https://leetcode.com/problems/count-good-nodes-in-binary-tree/description/
@@ -43,9 +41,38 @@ import type {
     BinaryTreeNode as TreeNode
 } from "../../common/binary-tree";
 
-function maxDepth(root: TreeNode | null): number {
-    return 0
+function goodNodes(root: TreeNode | null): number {
+    // Root Node is always a good node.
+    let count = 0;
+
+    // dfs traversal
+    const dfs = (node: TreeNode | null, maxValue: number) => {
+
+        // leaf node reached
+        if (!node) return
+
+        // if current node value is greater than or equal to parent value
+        const currentMaxValue = Math.max(maxValue, node.val)
+
+        // Node 4 -> (3,4) is the maximum value in the path starting from the root.
+        // Node 3 -> (3,1,3) is the maximum value in the path.
+        if (node.val >= currentMaxValue) {
+            count += 1;
+        }
+
+        // dfs traversal
+        dfs(node.left, currentMaxValue)
+        dfs(node.right, currentMaxValue)
+    }
+
+    // if root is null return 0
+    if (!root) return 0;
+    // dfs traversal
+    dfs(root, root.val)
+
+    // return good node value
+    return count;
 };
 
 
-export { maxDepth as solution };
+export { goodNodes as solution };
