@@ -50,10 +50,22 @@ describe("1448. Count Good Nodes in Binary Tree - Medium", () => {
         expect(result).toEqual(4);
     });
 
-    test("Input2: root = [1,null,2] ", () => {
-        const root = BinaryTreeNode.createFromArray([1, null, 2]);
+    test("Input2: root = [3,3,null,4,2] ", () => {
+        const root = BinaryTreeNode.createFromArray([3, 3, null, 4, 2]);
         const result = solution(root);
-        expect(result).toEqual(2);
+        expect(result).toEqual(3);
+    });
+
+    test("Input3: root = [9,null,3,6] ", () => {
+        const root = BinaryTreeNode.createFromArray([9, null, 3, 6]);
+        const result = solution(root);
+        expect(result).toEqual(1);
+    });
+
+    test("Input4: root = [-4,-4,5,null,null,4,-5,-5,2,1,null,null,-2,null,5,null,null,null,-4,null,null,-4,null,2,null,-1] ", () => {
+        const root = BinaryTreeNode.createFromArray([-4, -4, 5, null, null, 4, -5, -5, 2, 1, null, null, -2, null, 5, null, null, null, -4, null, null, -4, null, 2, null, -1]);
+        const result = solution(root);
+        expect(result).toEqual(4);
     });
 
 });
