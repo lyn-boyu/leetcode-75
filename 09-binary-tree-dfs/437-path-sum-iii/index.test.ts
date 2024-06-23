@@ -47,4 +47,10 @@ describe("437. Path Sum III - Medium", () => {
         expect(result).toEqual(3);
     });
 
+    test("Input3: root = [1], targetSum = 0 ", () => {
+        const root = BinaryTreeNode.createFromArray([1]);
+        const result = solution(root, 0);
+        expect(result).toEqual(0);
+    });
+
 });
