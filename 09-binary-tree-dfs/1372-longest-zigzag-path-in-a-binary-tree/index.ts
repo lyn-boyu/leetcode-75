@@ -43,7 +43,53 @@ import type {
 } from "../../common/binary-tree";
 
 function longestZigZag(root: TreeNode | null): number {
-    return 0
+
+    let maxLength = 0;
+    // dfs from root
+    // for each node,
+    // we can update the maxLength
+    // and then continue to  check the left and right direction
+    // there are two operations to try:
+    // 1. continue the current zigzag path
+    // 2. start a new zigzag path
+    // when we reach the leaf node, we can return the longest zigzag path
+
+    const findLongestZigZag = (node: TreeNode | null, parentDirecetion: 'left' | 'right', currentLength: number) => {
+        // when reach the leaf node update the max length
+        if (node === null) {
+            return
+        }
+
+        // check the left and right direction
+        // if the parentDirecetion is left, we try move to the right child
+        if (parentDirecetion === 'left') {
+            // continue the current zigzag path: we can move to the right child 
+            findLongestZigZag(node.right, 'right', currentLength + 1);
+            // start a new zigzag path: we can move to the left child 
+            findLongestZigZag(node.left, 'left', 1);
+        }
+
+        // if the direction is right, we try to move to the left child
+        if (parentDirecetion === 'right') {
+            // continue the current zigzag path: we can move to the right child 
+            findLongestZigZag(node.left, 'left', currentLength + 1);
+            // start a new zigzag path: we can move to the left child 
+            findLongestZigZag(node.right, 'right', 1);
+        }
+
+        // update the max length
+        maxLength = Math.max(maxLength, currentLength);
+    }
+
+    // start from the root node from both side 
+    if (root) {
+        findLongestZigZag(root.left, 'left', 1);
+        findLongestZigZag(root.right, 'right', 1);
+    }
+
+    // return the longest zigzag path 
+    // which is valid child count of current node
+    return maxLength
 };
 
 
