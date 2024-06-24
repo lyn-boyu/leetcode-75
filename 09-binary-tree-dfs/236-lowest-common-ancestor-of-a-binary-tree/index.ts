@@ -39,7 +39,27 @@ import {
 
 
 function lowestCommonAncestor(root: TreeNode | null, p: TreeNode | null, q: TreeNode | null): TreeNode | null {
-    return new TreeNode(0)
+    // if the root is null, which means reach the end return null
+    if (root === null) {
+        return null
+    }
+
+    // if target equal p or q then return current node
+    if (root === p || root === q) {
+        return root
+    }
+
+    // find target node by call lowestCommonAncestor recursively
+    const left = lowestCommonAncestor(root.left, p, q)
+    const right = lowestCommonAncestor(root.right, p, q)
+
+    // only if find left and right in descendant then root is the LCA
+    if (left !== null && right !== null) {
+        return root
+    }
+
+    // if only one side find target then return to higher level 
+    return left || right
 };
 
 
