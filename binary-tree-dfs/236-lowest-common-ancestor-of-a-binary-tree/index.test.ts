@@ -39,7 +39,7 @@ p and q will exist in the tree.
 
 import { expect, test, describe } from "bun:test";
 import { solution } from './index'
-import { BinaryTreeNode } from "../utils";
+import { BinaryTreeNode } from "../../common/binary-tree";
 
 describe("236. Lowest Common Ancestor of a Binary Tree - Medium ", () => {
 

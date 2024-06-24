@@ -41,8 +41,7 @@ Each node's value is between [-10^4, 10^4].
 
 import type {
     BinaryTreeNode as TreeNode
-} from "../utils";
-
+} from "../../common/binary-tree";
 
 function maxDepth(root: TreeNode | null): number {
     return 0

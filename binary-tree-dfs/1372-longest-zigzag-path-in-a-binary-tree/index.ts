@@ -40,8 +40,7 @@ The number of nodes in the tree is in the range [1, 5 * 104].
 
 import type {
     BinaryTreeNode as TreeNode
-} from "../utils";
-
+} from "../../common/binary-tree";
 
 function longestZigZag(root: TreeNode | null): number {
     return 0

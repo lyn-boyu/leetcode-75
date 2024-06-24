@@ -32,7 +32,7 @@ Both of the given trees will have values in the range [0, 200].
 
 import { expect, test, describe } from "bun:test";
 import { solution } from './index'
-import { BinaryTreeNode } from "../utils";
+import { BinaryTreeNode } from "../../common/binary-tree";
 
 describe("872. Leaf-Similar Trees - Easy", () => {
 

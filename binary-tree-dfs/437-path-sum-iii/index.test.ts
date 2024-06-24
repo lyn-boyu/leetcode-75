@@ -31,7 +31,7 @@ The number of nodes in the tree is in the range [0, 1000].
 
 import { expect, test, describe } from "bun:test";
 import { solution } from './index'
-import { BinaryTreeNode } from "../utils";
+import { BinaryTreeNode } from "../../common/binary-tree";
 
 describe("437. Path Sum III - Medium", () => {
 

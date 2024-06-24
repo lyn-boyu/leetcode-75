@@ -26,8 +26,7 @@ The number of nodes in the tree is in the range [0, 104].
 */
 import type {
     BinaryTreeNode as TreeNode
-} from "../utils";
-
+} from "../../common/binary-tree";
 
 function maxDepth(root: TreeNode | null): number {
     return 0

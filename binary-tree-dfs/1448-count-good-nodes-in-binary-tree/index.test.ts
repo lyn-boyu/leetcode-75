@@ -40,7 +40,7 @@ Each node's value is between [-10^4, 10^4].
 
 import { expect, test, describe } from "bun:test";
 import { solution } from './index'
-import { BinaryTreeNode } from "../utils";
+import { BinaryTreeNode } from "../../common/binary-tree";
 
 describe("1448. Count Good Nodes in Binary Tree - Medium", () => {
 

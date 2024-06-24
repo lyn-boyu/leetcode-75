@@ -31,8 +31,7 @@ Both of the given trees will have values in the range [0, 200].
 
 import type {
     BinaryTreeNode as TreeNode
-} from "../utils";
-
+} from "../../common/binary-tree";
 
 function leafSimilar(root1: TreeNode | null, root2: TreeNode | null): boolean {
     return false
