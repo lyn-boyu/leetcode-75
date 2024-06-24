@@ -34,8 +34,46 @@ import type {
 
 
 function maxLevelSum(root: TreeNode | null): number {
-    return 0
+    // store sum of each layer
+    const layerSums = []
+    // used for bfs
+    const queue = root ? [root] : []
+
+    // find the max number in layersums
+    let max = Number.NEGATIVE_INFINITY;
+    let maxLayer = Number.NEGATIVE_INFINITY;
+    let levelIdx = 1;
+
+    while (queue.length > 0) {
+        const layerLength = queue.length
+        let sum = 0
+        // iter through current layer
+        for (let i = 0; i < layerLength; i++) {
+            const node = queue.shift()
+            sum += node?.val ?? 0
+
+            if (i === layerLength - 1) {
+                layerSums.push(sum)
+            }
+            if (node?.left) {
+                queue.push(node.left)
+            }
+
+            if (node?.right) {
+                queue.push(node.right)
+            }
+        }
+        // update the maxLayer
+        if (sum > max) {
+            max = sum
+            maxLayer = levelIdx + 1
+        }
+    }
+
+    return maxLayer
 };
 
+// Time  complexity is O(n)
+// Space complexity is O(n)
 
 export { maxLevelSum as solution };
