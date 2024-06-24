@@ -34,7 +34,7 @@ import { expect, test, describe } from "bun:test";
 import { solution } from './index'
 import { BinaryTreeNode } from "../utils";
 
-describe(" 104. Maximum Depth of Binary Tree - Easy ", () => {
+describe("872. Leaf-Similar Trees - Easy", () => {
 
     test("Input1:root1 = [3,5,1,6,2,9,8,null,null,7,4], root2 = [3,5,1,6,7,4,2,null,null,null,null,null,null,9,8]", () => {
         const root1 = BinaryTreeNode.createFromArray([3, 5, 1, 6, 2, 9, 8, null, null, 7, 4]);

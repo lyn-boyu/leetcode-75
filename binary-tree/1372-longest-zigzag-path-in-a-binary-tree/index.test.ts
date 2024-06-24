@@ -45,7 +45,7 @@ import { expect, test, describe } from "bun:test";
 import { solution } from './index'
 import { BinaryTreeNode } from "../utils";
 
-describe(" 1372. Longest ZigZag Path in a Binary Tree - Medium ", () => {
+describe("1372. Longest ZigZag Path in a Binary Tree - Medium", () => {
 
     test("Input1: root = [1,null,1,1,1,null,null,1,1,null,1,null,null,null,1]", () => {
         const root = BinaryTreeNode.createFromArray([1, null, 1, 1, 1, null, null, 1, 1, null, 1, null, null, null, 1]);

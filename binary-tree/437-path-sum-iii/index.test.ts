@@ -33,7 +33,7 @@ import { expect, test, describe } from "bun:test";
 import { solution } from './index'
 import { BinaryTreeNode } from "../utils";
 
-describe(" 104. Maximum Depth of Binary Tree - Easy ", () => {
+describe("437. Path Sum III - Medium", () => {
 
     test("Input1: root = [10,5,-3,3,2,null,11,3,-2,null,1], targetSum = 8 ", () => {
         const root = BinaryTreeNode.createFromArray([10, 5, -3, 3, 2, null, 11, 3, -2, null, 1]);
