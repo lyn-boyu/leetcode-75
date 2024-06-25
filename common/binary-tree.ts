@@ -52,15 +52,12 @@ export class BinaryTreeNode {
         const queue = [root];
 
         while (queue.length > 0) {
-            const current = queue.shift() as BinaryTreeNode;
-            result.push(current.val);
-            if (current.left) {
-                queue.push(current.left);
-            } else {
-                result.push(null);
-            }
-            if (current.right) {
-                queue.push(current.right);
+            const current = queue.shift();
+
+            if (current) {
+                result.push(current.val);
+                queue.push(current.left!);
+                queue.push(current.right!);
             } else {
                 result.push(null);
             }
