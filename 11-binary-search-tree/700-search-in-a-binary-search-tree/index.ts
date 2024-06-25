@@ -33,7 +33,29 @@ import {
 } from "../../common/binary-tree";
 
 function searchBST(root: TreeNode | null, val: number): TreeNode | null {
-    return new TreeNode(0)
+
+    let subTreeRoot: TreeNode | null = null;
+
+    const dfsSearch = (node: TreeNode | null) => {
+        if (!node) {
+            return
+        }
+        if (node.val === val) {
+            subTreeRoot = node
+        }
+        dfsSearch(node.left)
+        dfsSearch(node.right)
+    }
+
+    dfsSearch(root)
+    // if find the value return the root node
+    if (subTreeRoot) {
+        return subTreeRoot
+    } else {
+        // if cannot find target value return null 
+        return null
+    }
+
 };
 
 export { searchBST as solution };
