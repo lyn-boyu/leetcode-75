@@ -69,5 +69,19 @@ describe("700. Search in a Binary Search Tree - Easy", () => {
         expect(BinaryTreeNode.toArray(result)).toEqual([]);
     });
 
+    test("Input4: root =[0],  val = 0", () => {
+        const root = BinaryTreeNode.createFromArray([]);
+        const val = 0;
+        const result = solution(root, val);
+        expect(BinaryTreeNode.toArray(result)).toEqual([]);
+    });
+
+    test("Input5: root =[5,3,6,2,4,null,7],  val = 5 ", () => {
+        const root = BinaryTreeNode.createFromArray([5, 3, 6, 2, 4, null, 7]);
+        const val = 5;
+        const result = solution(root, val);
+        expect(BinaryTreeNode.toArray(result)).toBeOneOf([[6, 3, 7, 2, 4], [4, 3, 6, 2, null, null, 7]]);
+    });
+
 
 });
