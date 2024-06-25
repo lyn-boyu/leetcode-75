@@ -32,30 +32,41 @@ import {
     BinaryTreeNode as TreeNode
 } from "../../common/binary-tree";
 
-function searchBST(root: TreeNode | null, val: number): TreeNode | null {
 
-    let subTreeRoot: TreeNode | null = null;
+// recursiveSearchBST
+export function recursiveSolution(root: TreeNode | null, val: number): TreeNode | null {
 
-    const dfsSearch = (node: TreeNode | null) => {
-        if (!node) {
-            return
-        }
-        if (node.val === val) {
-            subTreeRoot = node
-        }
-        dfsSearch(node.left)
-        dfsSearch(node.right)
-    }
+    function searchBST(root: TreeNode | null, val: number): TreeNode | null {
+        // reach the end, return null
+        if (!root) return null;
+        // if find target return node  
+        if (root.val === val) return root;
+        // right node is bigger than left node
+        if (root.val < val) return searchBST(root.right, val);
+        // left node is smaller than right node
+        if (root.val > val) return searchBST(root.left, val);
 
-    dfsSearch(root)
-    // if find the value return the root node
-    if (subTreeRoot) {
-        return subTreeRoot
-    } else {
-        // if cannot find target value return null 
         return null
     }
 
+    return searchBST(root, val)
+
 };
 
-export { searchBST as solution };
+
+// Iterative
+export function iterativeSolution(root: TreeNode | null, val: number): TreeNode | null {
+
+    function searchBST(root: TreeNode | null, val: number): TreeNode | null {
+        while (root !== null && root.val !== val) {
+            // assign new root to right or left node by comparing the value
+            root = val < root.val ? root.left : root.right;
+        }
+        return root;
+    }
+
+    return searchBST(root, val)
+
+};
+
+

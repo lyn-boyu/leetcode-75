@@ -30,23 +30,46 @@ root is a binary search tree.
 
 
 import { expect, test, describe } from "bun:test";
-import { solution } from './index'
+import { iterativeSolution, recursiveSolution } from './index'
 import { BinaryTreeNode } from "../../common/binary-tree";
 
 describe("700. Search in a Binary Search Tree - Easy", () => {
 
-    test("Input1: root = [4,2,7,1,3], val = 2", () => {
-        const root = BinaryTreeNode.createFromArray([4, 2, 7, 1, 3]);
-        const val = 2;
-        const result = solution(root, val);
-        expect(BinaryTreeNode.toArray(result)).toEqual([2, 1, 3]);
-    });
+    describe("Iterative Solution", () => {
+        test("Input1: root = [4,2,7,1,3], val = 2", () => {
+            const root = BinaryTreeNode.createFromArray([4, 2, 7, 1, 3]);
+            const val = 2;
+            const result = iterativeSolution(root, val);
+            expect(BinaryTreeNode.toArray(result)).toEqual([2, 1, 3]);
+        });
 
-    test("Input2: root = [4,2,7,1,3], val = 5 ", () => {
-        const root = BinaryTreeNode.createFromArray([4, 2, 7, 1, 3]);
-        const val = 5;
-        const result = solution(root, val);
-        expect(BinaryTreeNode.toArray(result)).toEqual([]);
-    });
+        test("Input2: root = [4,2,7,1,3], val = 5 ", () => {
+            const root = BinaryTreeNode.createFromArray([4, 2, 7, 1, 3]);
+            const val = 5;
+            const result = iterativeSolution(root, val);
+            expect(BinaryTreeNode.toArray(result)).toEqual([]);
+        });
+    })
+
+
+
+    describe("Recursive Solution", () => {
+        test("Input1: root = [4,2,7,1,3], val = 2", () => {
+            const root = BinaryTreeNode.createFromArray([4, 2, 7, 1, 3]);
+            const val = 2;
+            const result = recursiveSolution(root, val);
+            expect(BinaryTreeNode.toArray(result)).toEqual([2, 1, 3]);
+        });
+
+        test("Input2: root = [4,2,7,1,3], val = 5 ", () => {
+            const root = BinaryTreeNode.createFromArray([4, 2, 7, 1, 3]);
+            const val = 5;
+            const result = recursiveSolution(root, val);
+            expect(BinaryTreeNode.toArray(result)).toEqual([]);
+        });
+    })
+
+
+
 
 });
