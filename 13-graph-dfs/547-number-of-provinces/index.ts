@@ -33,13 +33,38 @@ isConnected[i][j] == isConnected[j][i]
 
 */
 
-
-import type {
-    BinaryTreeNode as TreeNode
-} from "../../common/binary-tree";
-
 function findCircleNum(isConnected: number[][]): number {
-    return 0
+    // province count
+    let count = 0
+    // nodes number
+    const N = isConnected.length
+    // record if a node is visited
+    const visited = new Array(N).fill(false);
+
+
+    const dfs = (node: number) => {
+        for (let neighbor = 0; neighbor < N; neighbor++) {
+            if (isConnected[node][neighbor] === 1 && !visited[neighbor]) {
+                // make it count only once
+                visited[neighbor] = true;
+                // search the connected node
+                dfs(neighbor);
+            }
+        }
+    }
+
+    // dfs change connected ele into 0
+    for (let i = 0; i < N; i++) {
+        if (!visited[i]) {
+            // mark current node and all its connected neighbours as 0
+            dfs(i)
+            // add one province
+            count++
+        }
+
+    }
+
+    return count
 };
 
 
