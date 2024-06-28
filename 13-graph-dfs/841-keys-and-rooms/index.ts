@@ -36,12 +36,27 @@ All the values of rooms[i] are unique.
 */
 
 
-import type {
-    BinaryTreeNode as TreeNode
-} from "../../common/binary-tree";
-
 function canVisitAllRooms(rooms: number[][]): boolean {
-    return false
+    const queue: number[][] = []
+    const visited = new Set()
+
+    // can open room 0 at the begginning
+    visited.add(0)
+    queue.push(rooms[0])
+
+    while (queue.length > 0) {
+        const neighbours = queue.shift() ?? []
+        for (let n of neighbours) {
+            if (!visited.has(n)) {
+                // add visit record
+                visited.add(n)
+                // push new rooms to the queue
+                queue.push(rooms[n])
+            }
+        }
+    }
+
+    return visited.size === rooms.length
 };
 
 
