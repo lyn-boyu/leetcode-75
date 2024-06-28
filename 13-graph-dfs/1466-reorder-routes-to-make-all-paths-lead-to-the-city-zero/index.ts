@@ -37,12 +37,102 @@ connections.length == n - 1
 connections[i].length == 2
 0 <= ai, bi <= n - 1
 ai != bi
+*/
 
+
+
+function minReorder(n: number, connections: number[][]): number {
+
+    const createEdgeIndex = (source: number, target: number) => `${source}-${target}`;
+
+    const buildGraph = (edges: number[][]) => {
+        // used for get target node neighbours with O(1) time complexity
+        const undirectedGraph = new Map<number, number[]>()
+        const directedEdgeSet = new Set<string>()
+
+        // insert nodes
+        edges.forEach(([source, target]) => {
+
+            if (!undirectedGraph.has(source)) {
+                undirectedGraph.set(source, [])
+            }
+
+            if (!undirectedGraph.has(target)) {
+                undirectedGraph.set(target, [])
+            }
+
+            undirectedGraph.get(source)!.push(target)
+            undirectedGraph.get(target)!.push(source)
+
+            const directedEdgeIndex = createEdgeIndex(source, target)
+            directedEdgeSet.add(directedEdgeIndex)
+        })
+
+        return { undirectedGraph, derectedEdgeSet: directedEdgeSet }
+    }
+
+    // count the changed nodes
+    let changeCount = 0
+    // store the visited nodes
+    const visited = new Set<number>()
+    // build graph for iterations
+    const { undirectedGraph, derectedEdgeSet } = buildGraph(connections)
+
+    const dfs = (node: number) => {
+        // mark node visited
+        visited.add(node)
+        // get list
+        const neighbours = undirectedGraph.get(node) ?? []
+
+        // iterate through
+        for (let neighbour of neighbours) {
+            // ensures process each node once
+            if (!visited.has(neighbour)) {
+                // reverse the target and source to ensure all cities can reach city 0
+                const directedEdgeIndex = createEdgeIndex(neighbour, node)
+
+                // if there is no exist path from target to source then add the change count by one 
+                if (!derectedEdgeSet.has(directedEdgeIndex)) {
+                    changeCount++
+                }
+
+                // dfs the next node
+                dfs(neighbour)
+            }
+        }
+    }
+
+    // start from root of the graph
+    dfs(0)
+
+
+    //time complexity O(V + E)
+    return changeCount
+};
+
+/**
+# Time Complexity: O(V + E)
+
+## Graph Construction: 
+Iterating through the connections array to build the undirected graph and directed edges set takes O(E) time, where E is the number of edges.
+
+## DFS Traversal: 
+Each node is visited once, and each edge is checked once, resulting in a total complexity of O(V + E), where V is the number of vertices (nodes) and E is the number of edges.
+Space Complexity: O(V + E)
+*/
+
+
+/**
+# Graph Storage: 
+The undirected graph (using Map<number, number[]>) and the directed edges set (using Set<string>) together require O(V + E) space.
+
+## DFS Recursion Stack: 
+In the worst case, the recursion stack for DFS can reach a depth of O(V).
+
+## Auxiliary Data Structures: 
+The visited set to keep track of visited nodes requires O(V) space.
 
 */
-function minReorder(n: number, connections: number[][]): number {
-    return 0
-};
 
 
 export { minReorder as solution };
