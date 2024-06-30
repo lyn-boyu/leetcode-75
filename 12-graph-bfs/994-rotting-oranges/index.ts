@@ -38,7 +38,82 @@ grid[i][j] is 0, 1, or 2.
 */
 
 function orangesRotting(grid: number[][]): number {
-    return -1
+    const rows = grid.length
+    const cols = grid[0] ? grid[0].length : 0
+    const queue: number[][] = []
+    let freshOrange = 0;
+    let minutes = 0
+
+    // we need find the first rotten orange put it into the bfs queue
+    grid.forEach((row, rowIdx) => {
+        row.forEach((node, colIdx) => {
+            // find the root node
+            if (node === 2) {
+                queue.push([colIdx, rowIdx])
+            }
+            // count the total fresh orange 
+            if (node === 1) {
+                freshOrange++
+            }
+        })
+    })
+
+    // if there is zero fresh orange then end at 0 minutes 
+    if (freshOrange === 0) return 0
+
+    // 4 directions only
+    const directions = [
+        // left 
+        [-1, 0],
+        //right
+        [1, 0],
+        // up 
+        [0, -1],
+        // down
+        [0, 1]
+    ]
+
+    // bfs from root node with its four directions
+    while (queue.length > 0) {
+        const currentQueueLength = queue.length;
+        let newRotten = false
+
+        for (let i = 0; i < currentQueueLength; i++) {
+            const node = queue.shift()
+            const [x, y] = node ?? []
+
+            directions.forEach((direction) => {
+
+                const [dx, dy] = direction;
+                const newX = x + dx
+                const newY = y + dy
+
+                if (newX >= 0 && newY >= 0 && newY < rows && newX < cols) {
+                    const neighbourValue = grid[newY][newX]
+                    if (neighbourValue === 1) {
+                        newRotten = true
+                        grid[newY][newX] = 2
+                        freshOrange--
+                        queue.push([newX, newY])
+                    }
+                }
+            })
+        }
+
+        // only add count when find new fresh orange in one search
+        if (newRotten) {
+            minutes += 1
+        }
+
+    }
+
+    // if there is any fresh orange which means rotten orange cannot reach it.
+    if (freshOrange !== 0) {
+        return -1
+    }
+
+    return minutes
+
 };
 
 export { orangesRotting as solution }
