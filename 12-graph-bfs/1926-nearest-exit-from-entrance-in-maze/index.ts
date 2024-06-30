@@ -53,7 +53,48 @@ entrance will always be an empty cell.
 */
 
 function nearestExit(maze: string[][], entrance: number[]): number {
-    return 0
+    const rows = maze.length;
+    const cols = maze[0] ? maze[0].length : 0
+    const directions = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+    const visited = new Set()
+
+
+    visited.add(`${entrance[0]},${entrance[1]}`)
+    let queue: number[][] = [[entrance[0], entrance[1], 0]] // x, y, step
+
+    while (queue.length > 0) {
+
+        const [x, y, steps] = queue.shift()!
+
+        for (let direction of directions) {
+            const [dx, dy] = direction;
+            const nX = x + dx;
+            const nY = y + dy;
+
+            // new node should not exceed the boundries
+            if (nX < 0 || nY < 0 || nX >= rows || nY >= cols) {
+                continue
+            }
+            //  can not visit walls
+            if (maze[nX][nY] === '+') {
+                continue
+            }
+            //  exit node is not exist in visited nodes
+            if (visited.has(`${nX},${nY}`)) {
+                continue
+            }
+            // exit found, return steps + 1
+            if (nX === 0 || nY === 0 || nX === rows - 1 || nY === cols - 1) {
+                return steps + 1
+            }
+            // search for neighbours
+            queue.push([nX, nY, steps + 1])
+            visited.add(`${nX},${nY}`)
+        }
+    }
+
+
+    return -1
 };
 
 export { nearestExit as solution }
