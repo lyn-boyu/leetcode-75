@@ -28,7 +28,7 @@ Constraints:
 
 import { expect, test, describe } from "bun:test";
 import { solution } from './index'
-
+import { data } from './big-data'
 
 describe("215. Kth Largest Element in an Array - Medium", () => {
 
@@ -42,8 +42,16 @@ describe("215. Kth Largest Element in an Array - Medium", () => {
     test('Input2: nums = [3,2,3,1,2,4,5,5,6], k = 4', () => {
         const nums = [3, 2, 3, 1, 2, 4, 5, 5, 6]
         const k = 4
-        const result = solution(nums, k);
-        expect(result).toBeCloseTo(4);
+        const result = solution(nums, k)
+        expect(result).toBeCloseTo(4)
+    });
+    test('Input3: nums = [...], k = 13377', () => {
+        const nums = data
+        const k = 13377
+        const target = [...data].sort((a, b) => b - a)
+        const correctNum = target[k]
+        const result = solution(nums, k)
+        expect(result).toBeCloseTo(correctNum)
     });
 
 
