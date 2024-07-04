@@ -71,6 +71,54 @@ Constraints:
 */
 
 
+import { MinHeap } from '../../common/min-heap'
+
 export function totalCost(costs: number[], k: number, candidates: number): number {
-    return -1
+  let totalCost = 0
+  let n = costs.length
+
+
+  const headHeap = new MinHeap()
+  const tailHeap = new MinHeap()
+
+  // init head and tail
+  for (let i = 0; i < candidates; i++) {
+    headHeap.insert(costs[i])
+  }
+
+  // init tailHeap: if there is no enough candidates do not insert 
+  for (let i = Math.max(n - candidates, candidates); i < n; i++) {
+    tailHeap.insert(costs[i])
+  }
+
+
+  // maintain next head and tail idx
+  let nextHeadIdx = candidates
+  let nextTailIdx = n - 1 - candidates
+
+  // use for to 
+
+  for (let i = 0; i < k; i++) {
+    let minCost = 0;
+    if ((tailHeap.size() === 0) || (headHeap.size() > 0 && headHeap.peek() <= tailHeap.peek())) {
+      minCost = headHeap.extractMin()!
+      if (nextHeadIdx <= nextTailIdx && nextHeadIdx < n) {
+        headHeap.insert(costs[nextHeadIdx])
+        // move backward
+        nextHeadIdx++
+      }
+    } else {
+      minCost = tailHeap.extractMin()!
+      if (nextTailIdx >= 0 && nextTailIdx >= nextHeadIdx) {
+        tailHeap.insert(costs[nextTailIdx])
+        // move forward
+        nextTailIdx--
+      }
+    }
+
+    totalCost += minCost
+  }
+
+
+  return totalCost
 };
