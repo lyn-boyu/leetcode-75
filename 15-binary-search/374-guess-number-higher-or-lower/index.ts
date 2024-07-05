@@ -62,30 +62,29 @@ const guess = (num: number) => {
 }
 
 
-
-
-let GLOBALS = {
-    pick: -1
-}
-
-export const setPickValue = (value: number) => GLOBALS.pick = value
-
-
-const guess = (num: number) => {
-    if (num === GLOBALS.pick) {
-        return 0;
-    } else if (num < GLOBALS.pick) {
-        return 1;
-    } else {
-        return -1;
-    }
-}
-
-
-
-
 function guessNumber(n: number): number {
-    return -1
+    let low = 1
+    let high = n
+
+    // start with middle number
+    let currentGuess = -1
+    while (low <= high) {
+        const mid = Math.floor((low + high) / 2)
+        const result = guess(mid)
+
+        if (result === 0) {
+            return mid
+        }
+        //  -1: Your guess is higher than the number I picked(i.e.num > pick).
+        if (result === -1) {
+            high = mid - 1
+        }
+        //  1: Your guess is lower than the number I picked(i.e.num < pick).
+        if (result === 1) {
+            low = mid + 1
+        }
+    }
+    return currentGuess
 };
 
 export { guessNumber as solution }
