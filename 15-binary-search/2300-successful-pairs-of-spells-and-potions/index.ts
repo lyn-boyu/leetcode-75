@@ -41,6 +41,17 @@ m == potions.length
 */
 
 export function successfulPairs(spells: number[], potions: number[], success: number): number[] {
-    return []
+    const result: number[] = []
+    // ascending
+    potions.sort((a, b) => a - b)
+
+    for (let spell of spells) {
+        const minPotionValue = success / spell
+        const idx = potions.findIndex(p => p >= minPotionValue)
+        // eg. [1]: idx = 0 length 1 count = 1
+        const count = idx === -1 ? 0 : potions.length - idx
+        result.push(count)
+    }
+    return result
 };
 
