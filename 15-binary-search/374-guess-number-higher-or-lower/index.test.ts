@@ -36,7 +36,10 @@ Constraints:
 */
 
 import { expect, test, describe } from "bun:test";
-import { solution } from './index'
+import { setPickValue, solution } from './index'
+
+
+
 
 
 describe("374. Guess Number Higher or Lower - Easy", () => {
@@ -44,6 +47,7 @@ describe("374. Guess Number Higher or Lower - Easy", () => {
     test('Input1:  n = 10, pick = 6', () => {
         const n = 10
         const pick = 6
+        setPickValue(pick)
         const result = solution(n);
         expect(result).toBe(pick);
     });
@@ -51,13 +55,15 @@ describe("374. Guess Number Higher or Lower - Easy", () => {
     test('Input2:  n = 1, pick = 1', () => {
         const n = 1
         const pick = 1
+        setPickValue(pick)
         const result = solution(n);
         expect(result).toBe(pick);
     });
 
     test('Input3: n = 2, pick = 1', () => {
-        const n = 1
+        const n = 2
         const pick = 1
+        setPickValue(pick)
         const result = solution(n);
         expect(result).toBe(pick);
     });

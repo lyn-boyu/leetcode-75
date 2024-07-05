@@ -34,6 +34,15 @@ Constraints:
 1 <= n <= 231 - 1
 1 <= pick <= n
 */
+
+
+let GLOBALS = {
+    pick: -1
+}
+
+export const setPickValue = (value: number) => GLOBALS.pick = value
+
+
 /** 
  * Forward declaration of guess API.
  * @param {number} num   your guess
@@ -42,11 +51,21 @@ Constraints:
  *               otherwise return 0
  * var guess = function(num) {}
  */
+const guess = (num: number) => {
+    if (num === GLOBALS.pick) {
+        return 0;
+    } else if (num < GLOBALS.pick) {
+        return 1;
+    } else {
+        return -1;
+    }
+}
+
+
 
 
 function guessNumber(n: number): number {
     return -1
 };
-
 
 export { guessNumber as solution }
