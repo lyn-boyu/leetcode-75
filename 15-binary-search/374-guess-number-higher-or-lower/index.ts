@@ -64,6 +64,26 @@ const guess = (num: number) => {
 
 
 
+let GLOBALS = {
+    pick: -1
+}
+
+export const setPickValue = (value: number) => GLOBALS.pick = value
+
+
+const guess = (num: number) => {
+    if (num === GLOBALS.pick) {
+        return 0;
+    } else if (num < GLOBALS.pick) {
+        return 1;
+    } else {
+        return -1;
+    }
+}
+
+
+
+
 function guessNumber(n: number): number {
     return -1
 };
