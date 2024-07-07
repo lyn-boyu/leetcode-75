@@ -32,7 +32,27 @@ nums[i] != nums[i + 1] for all valid i.
 */
 
 function findPeakElement(nums: number[]): number {
- return -1
+    let left = 0
+    let right = nums.length - 1
+
+    while (left <= right) {
+        // calc the middle 
+        const mid = Math.floor((left + right) / 2)
+        const midValue = nums[mid];
+
+        // if mid reach the left end,then right value should be NEGATIVE_INFINITY
+        const rightValue = mid === 0 ? Number.NEGATIVE_INFINITY : nums[mid - 1]
+        // if mid reach the left end,the left value should be  NEGATIVE_INFINITY
+        const leftValue = mid === nums.length - 1 ? Number.NEGATIVE_INFINITY : nums[mid + 1]
+
+        if (leftValue > midValue) {
+            left = mid + 1
+        } else if (rightValue > midValue) {
+            right = mid - 1
+        } else {
+            return mid
+        }
+    }
 };
 
 export { findPeakElement as solution }
