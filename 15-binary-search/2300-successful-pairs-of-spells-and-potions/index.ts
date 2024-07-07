@@ -39,19 +39,38 @@ m == potions.length
 1 <= success <= 1010
 
 */
+function binarySearchIdx(target: number, nums: number[]) {
+    let left = 0;
+    let right = nums.length - 1;
+    //  util two pointer meet which means find the target
+    while (left <= right) {
+        const mid = Math.floor((left + right) / 2)
+        // if current is small than target move left 
+        if (nums[mid] < target) {
+            left = mid + 1
+        } else {
+            // if current is bigger than target move right 
+            right = mid - 1
+        }
+    }
+    // if reach end canot find target return  -1
+    return left < nums.length ? left : -1
+}
+
 
 export function successfulPairs(spells: number[], potions: number[], success: number): number[] {
     const result: number[] = []
     // ascending
-    potions.sort((a, b) => a - b)
+    potions.sort((a, b) => a - b);
 
     for (let spell of spells) {
         const minPotionValue = success / spell
-        const idx = potions.findIndex(p => p >= minPotionValue)
+        const idx = binarySearchIdx(minPotionValue, potions)
         // eg. [1]: idx = 0 length 1 count = 1
         const count = idx === -1 ? 0 : potions.length - idx
         result.push(count)
     }
     return result
 };
+
 
