@@ -32,7 +32,30 @@ piles.length <= h <= 109
 */
 
 function minEatingSpeed(piles: number[], h: number): number {
-    return -1
+    let start = 1
+    let end = Math.max(...piles)
 
+
+    while (start < end) {
+        const mid = Math.floor((start + end) / 2)
+        let time = 0
+
+        // get total cosume time
+        for (let pile of piles) {
+            time += Math.ceil(pile / mid)
+        }
+
+        // if still have time to spend, koko can slow down
+        if (time <= h) {
+            // mid is valid,therefore we do not need substrct one
+            end = mid
+        } else {
+            // have to speed up, add one 
+            start = mid + 1
+        }
+    }
+
+    return start
 };
+
 export { minEatingSpeed as solution }
