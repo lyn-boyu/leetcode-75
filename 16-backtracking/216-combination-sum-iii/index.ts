@@ -40,7 +40,48 @@ Constraints:
 */
 
 function combinationSum3(k: number, n: number): number[][] {
-    return []
+    const result: number[][] = []
+    const tempStack: number[] = []
+    const options = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+    const backtrack = (startIdx: number, acc: number) => {
+
+        if (tempStack.length === k) {
+            if (acc === n) {
+                result.push([...tempStack])
+            }
+            return
+        }
+
+        // always proceed with numbers in increasing order
+        for (let i = startIdx; i < options.length; i++) {
+            const option = options[i]
+            //  break out of the loop early since further options will also exceed n.
+            if (acc + option > n) break
+
+            tempStack.push(option)
+            backtrack(i + 1, acc + option)
+            tempStack.pop()
+        }
+
+    }
+
+    backtrack(0, 0)
+
+    return result
 };
 
 export { combinationSum3 as solution }
+
+
+/**
+ 
+# Time Complexity:
+The worst-case time complexity remains O(9^k) due to the nature of generating combinations. However, early termination reduces the practical complexity.
+The combinatorial nature (C(9, k)) also affects the practical performance.
+
+# Space Complexity:
+The space complexity remains O(k) for the recursion stack and temporary stack.
+The result array will store all valid combinations, with a worst-case space complexity of O(C(9, k)).
+
+*/
