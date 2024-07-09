@@ -4,7 +4,6 @@
 
 https://leetcode.com/problems/domino-and-tromino-tiling/description/
 
-
 You have two types of tiles: a 2 x 1 domino shape and a tromino shape. 
 You may rotate these shapes.
 ** domino
