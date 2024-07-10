@@ -26,7 +26,10 @@ Two tilings are different if and only if there are two 4-directionally adjacent 
 Example 1:
 Input: n = 3
 Output: 5
+XYZ XXZ XYY XXY XYY
+XYZ YYZ XZZ XYY XXY
 Explanation: The five different ways are show above.
+
 
 
 Example 2:
@@ -39,8 +42,44 @@ Constraints:
 
 */
 
-function numTilings(n: number): number {
-    return -1
+function numTilings(N: number): number {
+    const MOD = 1000000007;
+
+    // Step1: define the state. 
+    // dp1[i] store the total ways of tiling
+    const dp1 = new Array(N + 1).fill(0);
+    // dp2[i] store the way to form L
+    const dp2 = new Array(N + 1).fill(0);
+
+    // Step2: inital the base cases.
+    dp1[0] = 1;
+    //  X
+    //  X
+    dp1[1] = 1;
+    //  XX  XY
+    //  YY  XY
+    dp1[2] = 2;
+
+    // no L tromino can put
+    dp2[1] = 0;
+    dp2[2] = 1;
+
+    // Step3: Fill the DP table according to the state transition equation
+    for (let i = 3; i <= N; i++) {
+        // Step4: Determin the state transition equation
+        /**
+         - dp1[i - 1]:  add one domino vertically based on dp1[i - 1] solutions
+         - dp1[i - 2]:  add two domino vertically based on dp1[i - 2] solutions
+         - dp2[i - 1] * 2:  fill blank L space by using tromino  *2 means different direction
+         */
+        dp1[i] = (dp1[i - 1] + dp1[i - 2] + dp2[i - 1] * 2) % MOD;
+        //  XX   XX  
+        //  X    Z  
+        dp2[i] = (dp1[i - 2] + dp2[i - 1])
+    }
+
+    // Step5: Construct the result using DP table 
+    return dp1[N];
 };
 
 export { numTilings as solution }
