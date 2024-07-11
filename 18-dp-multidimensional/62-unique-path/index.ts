@@ -42,7 +42,37 @@ Constraints:
 */
 
 function uniquePaths(m: number, n: number): number {
-    return -1
+    const rows = m;
+    const cols = n;
+    // Step1: Define the state.
+    const dp = Array.from({ length: rows }, () => Array(cols).fill(0))
+
+    // Step2: Initialize the base cases.
+    dp[0][0] = 1 // The starting point at the top-left corner.
+
+    // Step 3: Fill the table according to the state transition equation.
+    for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+            // Think about edge cases
+            // Skip the starting point as it's already initialized.
+            if (row === 0 && col === 0) {
+                continue
+            }
+            // Step 4: Determin the state transition equation
+            if (row === 0) {
+                // If in the first row, move from right only
+                dp[row][col] = dp[row][col - 1]
+            } else if (col === 0) {
+                // If in the first column, move from top only
+                dp[row][col] = dp[row - 1][col]
+            } else {
+                // move from top and right
+                dp[row][col] = dp[row - 1][col] + dp[row][col - 1]
+            }
+        }
+    }
+    // Step 5: Construct the result using DP table
+    return dp[m - 1][n - 1]
 };
 
 
