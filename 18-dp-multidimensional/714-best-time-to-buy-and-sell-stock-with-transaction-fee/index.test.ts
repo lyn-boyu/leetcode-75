@@ -40,19 +40,35 @@ Constraints:
 */
 
 import { expect, test, describe } from "bun:test";
-import { solution } from './index'
+import { rollingArraySolution, tableSolution } from './index'
 
 
 describe("714. Best Time to Buy and Sell Stock with Transaction Fee - Medium", () => {
 
-    test('Input1:  prices = [1,3,2,8,4,9], fee = 2 ', () => {
-        const prices = [1, 3, 2, 8, 4, 9], fee = 2
-        expect(solution(prices, fee)).toEqual(8);
-    });
+    describe("Rolling Array Solution", () => {
+        test('Input1:  prices = [1,3,2,8,4,9], fee = 2 ', () => {
+            const prices = [1, 3, 2, 8, 4, 9], fee = 2
+            expect(rollingArraySolution(prices, fee)).toEqual(8);
+        });
 
-    test('Input2: prices = [1,3,7,5,10,3], fee = 3 ', () => {
-        const prices = [1, 3, 7, 5, 10, 3], fee = 3
-        expect(solution(prices, fee)).toEqual(6);
-    });
+        test('Input2: prices = [1,3,7,5,10,3], fee = 3 ', () => {
+            const prices = [1, 3, 7, 5, 10, 3], fee = 3
+            expect(rollingArraySolution(prices, fee)).toEqual(6);
+        });
+
+    })
+
+    describe("Table Solution", () => {
+        test('Input1:  prices = [1,3,2,8,4,9], fee = 2 ', () => {
+            const prices = [1, 3, 2, 8, 4, 9], fee = 2
+            expect(tableSolution(prices, fee)).toEqual(8);
+        });
+
+        test('Input2: prices = [1,3,7,5,10,3], fee = 3 ', () => {
+            const prices = [1, 3, 7, 5, 10, 3], fee = 3
+            expect(tableSolution(prices, fee)).toEqual(6);
+        });
+    })
+
 
 });

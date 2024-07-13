@@ -33,15 +33,78 @@ Output: 6
  
 
 Constraints:
-1 <= prices.length <= 5 * 104
-1 <= prices[i] < 5 * 104
-0 <= fee < 5 * 104
+1 <= prices.length <= 5 * 10^4
+1 <= prices[i] < 5 * 10^4
+0 <= fee < 5 * 10^4
 
 */
 
-function maxProfit(prices: number[], fee: number): number {
-    return -1
-};
 
 
-export { maxProfit as solution }
+
+
+/**
+- Space complexity: O(n)
+- Time complexity: O(n)
+*/
+export function tableSolution(prices: number[], fee: number): number {
+
+    // Step 1: Define State 
+    // dp[i][0] means max profit on day i without holding stock
+    // dp[i][1] means max profit on day i while holding stock
+    const n = prices.length;
+    // Edge cases
+    if (n === 0) return 0;
+
+    const dp = Array.from({ length: n }, () => [0, 0]);
+
+    // Step 2: Initialize Base Cases
+    dp[0][0] = 0;  // No stock held
+    dp[0][1] = -prices[0];  // Bought stock on day 0
+
+    // Step 3: Fill the table using state transition equations
+    for (let i = 1; i < n; i++) {
+        // Step 4: Determine state transition equations
+        // Not holding stock on day i:
+        // - Option 1: Sold stock which was held on day i-1
+        // - Option 2: Kept cash from day i-1
+        dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i] - fee);
+
+        // Holding stock on day i:
+        // - Option 1: Bought stock on day i
+        // - Option 2: Kept stock from day i-1
+        dp[i][1] = Math.max(dp[i - 1][0] - prices[i], dp[i - 1][1]);
+    }
+
+    // Step 5: Construct the result using dp table
+    return dp[n - 1][0];  // Maximum profit on the last day without holding stock
+
+}
+
+/**
+- Space complexity: O(1)
+- Time complexity: O(n)
+*/
+export function rollingArraySolution(prices: number[], fee: number): number {
+    let n = prices.length;
+    if (n === 0) return 0; // If there are no prices, return 0 profit.
+
+    let hold = -prices[0]; // Initialize hold: Maximum profit when holding a stock after the first day.
+    let cash = 0; // Initialize cash: Maximum profit when not holding a stock after the first day.
+
+    for (let i = 1; i < n; i++) {
+        // Calculate the new hold state: either keep holding the stock or buy the stock today.
+        let newHold = Math.max(hold, cash - prices[i]);
+
+        // Calculate the new cash state: either keep not holding the stock or sell the stock today.
+        let newCash = Math.max(cash, hold + prices[i] - fee);
+
+        // Update hold and cash for the next iteration.
+        hold = newHold;
+        cash = newCash;
+    }
+
+    // The maximum profit is in the cash state, as we end up not holding any stock.
+    return cash;
+}
+
