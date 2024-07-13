@@ -37,7 +37,37 @@ text1 and text2 consist of only lowercase English characters.
 */
 
 function longestCommonSubsequence(text1: string, text2: string): number {
-    return -1
+    // Step6: Think about the edge cases
+    // if text2 is empty, then the longest common subsequence equal 0
+    const m = text1.length
+    const n = text2.length
+    if (m === 0 || n === 0) {
+        return 0
+    }
+
+    // Step1: Define the state
+    // dp[i][j] store the longest common subsequence of text1[i] and text2[j]
+    const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0))
+
+    // Step2: Initialize the base cases
+    // dp[text1.length][i] and dp[i][text1.length] is filled with 0 
+
+    //  Step3: Fill the table using the state transition equation
+    for (let i = m - 1; i >= 0; i--) {
+        for (let j = n - 1; j >= 0; j--) {
+            // Step4:  Determin the state transition equation
+            if (text1[i] === text2[j]) {
+                // if text1[i] and text2[j] are equal, these two characters are part of the lcs"
+                dp[i][j] = dp[i + 1][j + 1] + 1
+            } else {
+                // if cannot find lcs in  dp[i + 1][j + 1] then try different path
+                dp[i][j] = Math.max(dp[i + 1][j], dp[i][j + 1])
+            }
+        }
+    }
+
+    // Step5: Contruct the result using DP table
+    return dp[0][0]
 };
 
 
