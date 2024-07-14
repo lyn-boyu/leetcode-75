@@ -37,38 +37,38 @@ text1 and text2 consist of only lowercase English characters.
 */
 
 function longestCommonSubsequence(text1: string, text2: string): number {
-    // Step6: Think about the edge cases
-    // if text2 is empty, then the longest common subsequence equal 0
-    const m = text1.length
-    const n = text2.length
-    if (m === 0 || n === 0) {
-        return 0
-    }
+    // Get the lengths of both input strings
+    const m = text1.length;
+    const n = text2.length;
 
-    // Step1: Define the state
-    // dp[i][j] store the longest common subsequence of text1[i] and text2[j]
-    const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0))
+    // Step 1: Define the state table
+    // dp[i][j] will store the length of the longest common subsequence of text1[0..i-1] and text2[0..j-1]
+    const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
 
-    // Step2: Initialize the base cases
-    // dp[text1.length][i] and dp[i][text1.length] is filled with 0 
+    // Step 2: Initialize the base cases
+    // If one of the strings is empty, the LCS length is 0
+    // This is already handled by the initialization with zeros
 
-    //  Step3: Fill the table using the state transition equation
-    for (let i = m - 1; i >= 0; i--) {
-        for (let j = n - 1; j >= 0; j--) {
-            // Step4:  Determin the state transition equation
-            if (text1[i] === text2[j]) {
-                // if text1[i] and text2[j] are equal, these two characters are part of the lcs"
-                dp[i][j] = dp[i + 1][j + 1] + 1
+    // Step 3: Fill the table using the state transition equations
+    for (let i = 1; i <= m; i++) {
+        for (let j = 1; j <= n; j++) {
+            // Step 4: Determine the state transition equation
+            if (text1[i - 1] === text2[j - 1]) {
+                // If the characters match, extend the LCS found so far by 1
+                dp[i][j] = dp[i - 1][j - 1] + 1;
             } else {
-                // if cannot find lcs in  dp[i + 1][j + 1] then try different path
-                dp[i][j] = Math.max(dp[i + 1][j], dp[i][j + 1])
+                // If they don't match, take the maximum LCS by either
+                // ignoring the current character of text1 or text2
+                dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
             }
         }
     }
 
-    // Step5: Contruct the result using DP table
-    return dp[0][0]
-};
+    // Step 5: Construct the result using the DP table
+    // The length of the longest common subsequence of text1 and text2 is in dp[m][n]
+    return dp[m][n];
+}
+
 
 
 export { longestCommonSubsequence as solution }
