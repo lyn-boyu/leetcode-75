@@ -41,21 +41,31 @@ Follow up:
 */
 
 import { expect, test, describe } from "bun:test";
-import { solution } from './index'
+import { countBitsByStringManipulation, countBitsByDP } from './index'
 
 
 describe("338. Counting Bits - Easy", () => {
 
-    test('Input1:  n = 2', () => {
-        const n = 2
-        expect(solution(2)).toEqual([0, 1, 1]);
-    });
+    describe("O(n) solution", () => {
+        test('Input1:  n = 2', () => {
+            const n = 2
+            expect(countBitsByDP(n)).toEqual([0, 1, 1]);
+        });
+        test('Input2:  n = 5 ', () => {
+            const n = 5
+            expect(countBitsByDP(n)).toEqual([0, 1, 1, 2, 1, 2]);
+        });
+    })
 
-
-    test('Input2:  n = 5 ', () => {
-        const n = 5
-        expect(solution(n)).toEqual([0, 1, 1, 2, 1, 2]);
-    });
-
+    describe("O(n log n) solution", () => {
+        test('Input1:  n = 2', () => {
+            const n = 2
+            expect(countBitsByStringManipulation(n)).toEqual([0, 1, 1]);
+        });
+        test('Input2:  n = 5 ', () => {
+            const n = 5
+            expect(countBitsByStringManipulation(n)).toEqual([0, 1, 1, 2, 1, 2]);
+        });
+    })
 
 });
