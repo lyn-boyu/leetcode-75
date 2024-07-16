@@ -29,7 +29,47 @@ Each element in the array appears twice except for one element which appears onl
 
 */
 
+
+
+
+
 function singleNumber(nums: number[]): number {
-    return -1
+    let unique = 0
+
+    /*
+        To meet the problem's requirements of linear time complexity and constant extra space, 
+        we can use the properties of the bitwise XOR operation. The bitwise XOR has an important property:
+        - For any integer a, it holds that a ^ a = 0 and a ^ 0 = a.
+        - The XOR operation is commutative, meaning a ^ b ^ a = b ^ (a ^ a) = b ^ 0 = b.
+    */
+    for (let m of nums) {
+        unique = m ^ unique
+    }
+
+    return unique
 };
+
+
+/**
+ function singleNumber(nums: number[]): number {
+    // The time complexity of sorting is O(n log n), use extra space
+    // Quicksort use O(log n) space
+    // Mergesort use O(n) space
+    // Insertion Sort use O(1) space
+    nums.sort((a, b) => a - b)
+
+    for (let i = 0; i < nums.length; i++) {
+        const prev = nums[i - 1]
+        const curr = nums[i]
+        const next = nums[i + 1]
+
+        // if cannot pair with the neighbour letters 
+        if ((prev !== curr) && (curr !== next)) {
+            return curr
+        }
+    }
+};
+*/
+
+
 export { singleNumber as solution }

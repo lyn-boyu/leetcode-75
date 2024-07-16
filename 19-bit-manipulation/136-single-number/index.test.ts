@@ -47,7 +47,7 @@ describe("136. Single Number - Easy", () => {
 
     test('Input3: nums = [1]', () => {
         const nums = [1]
-        expect(solution(nums)).toEqual(4);
+        expect(solution(nums)).toEqual(1);
     });
 
 
