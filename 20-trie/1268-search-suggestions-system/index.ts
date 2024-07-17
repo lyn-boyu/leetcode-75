@@ -36,5 +36,21 @@ searchWord consists of lowercase English letters.
 */
 
 export function suggestedProducts(products: string[], searchWord: string): string[][] {
-    return []
+    products.sort()
+    const results = []
+    let prefix = ''
+    for (let char of searchWord) {
+        prefix += char
+        const suggestions: string[] = []
+        for (let product of products) {
+            if (product.startsWith(prefix)) {
+                suggestions.push(product)
+            }
+            if (suggestions.length === 3) {
+                break
+            }
+        }
+        results.push(suggestions)
+    }
+    return results
 };
