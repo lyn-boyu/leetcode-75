@@ -37,22 +37,59 @@ word and prefix consist only of lowercase English letters.
 At most 3 * 104 calls in total will be made to insert, search, and startsWith.
 */
 
-export class Trie {
-    constructor() {
+class TrieNode {
+    children: Map<string, TrieNode>
+    word: string | null
 
+    constructor() {
+        this.children = new Map();
+        this.word = null
+    }
+}
+
+export class Trie {
+
+    root: TrieNode;
+    
+    constructor() {
+        this.root = new TrieNode()
     }
 
     insert(word: string): void {
-
+        let node = this.root;
+        // dfs to the bottom
+        for (let char of word) {
+            if (!node.children.has(char)) {
+                node.children.set(char, new TrieNode())
+            }
+            node = node.children.get(char)!
+        }
+        node.word = word
     }
 
     search(word: string): boolean {
-        return false
+        let node = this.root
+        for (let char of word) {
+            if (!node.children.has(char)) {
+                // early break if cannot find char node
+                return false
+            }
+            node = node.children.get(char)!
+        }
+        // until reach the leaf node
+        return node.word === word
     }
 
     startsWith(prefix: string): boolean {
-        return false
-
+        let node = this.root
+        for (let char of prefix) {
+            if (!node.children.has(char)) {
+                return false
+            }
+            node = node.children.get(char)!
+        }
+        // return true if each char in prefix can find in Trie 
+        return true
     }
 }
 
