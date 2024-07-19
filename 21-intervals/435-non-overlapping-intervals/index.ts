@@ -34,27 +34,32 @@ intervals[i].length == 2
 
 
 export function eraseOverlapIntervals(intervals: number[][]): number {
+    // If the intervals array is empty, return 0
+    if (intervals.length === 0) return 0;
 
-    if (intervals.length === 0) return 0
-    intervals.sort((a, b) => a[1] - b[1])
+    // Sort the intervals by their end times in ascending order
+    intervals.sort((a, b) => a[1] - b[1]);
 
-    let count = 0
-    let currentEnd = intervals[0][1]
+    let count = 0; // Number of intervals to remove
+    let currentEnd = intervals[0][1]; // End time of the current non-overlapping interval
 
+    // Iterate through the sorted intervals starting from the second one
     for (let i = 1; i < intervals.length; i++) {
-        const nextStart = intervals[i][0]
+        const nextStart = intervals[i][0]; // Start time of the next interval
         if (nextStart < currentEnd) {
-            count++
+            // If the start time of the next interval is less than the end time of the current interval, they overlap
+            count++;
         } else {
-            currentEnd = intervals[i][1]
+            // If they do not overlap, update the end time to the end time of the next interval
+            currentEnd = intervals[i][1];
         }
     }
 
-    return count
+    return count; // Return the number of intervals to remove
 };
 
 
-export function firstTry(intervals: number[][]): number {
+export function solution(intervals: number[][]): number {
     const isOverlapped = (interval1: number[], interval2: number[]) => {
         const [start1, end1] = interval1;
         const [start2, end2] = interval2
