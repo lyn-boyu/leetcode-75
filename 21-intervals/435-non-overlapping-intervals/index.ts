@@ -34,5 +34,54 @@ intervals[i].length == 2
 
 
 export function eraseOverlapIntervals(intervals: number[][]): number {
-    return -1
+
+    if (intervals.length === 0) return 0
+    intervals.sort((a, b) => a[1] - b[1])
+
+    let count = 0
+    let currentEnd = intervals[0][1]
+
+    for (let i = 1; i < intervals.length; i++) {
+        const nextStart = intervals[i][0]
+        if (nextStart < currentEnd) {
+            count++
+        } else {
+            currentEnd = intervals[i][1]
+        }
+    }
+
+    return count
 };
+
+
+export function firstTry(intervals: number[][]): number {
+    const isOverlapped = (interval1: number[], interval2: number[]) => {
+        const [start1, end1] = interval1;
+        const [start2, end2] = interval2
+        return start1 < end2 && start2 < end1
+    }
+
+    intervals.sort((a, b) => a[0] - b[0])
+
+    const removed = []
+
+    let curr = intervals.shift()
+    let next = intervals.shift()
+
+    while (next && curr) {
+        if (isOverlapped(curr, next)) {
+            // keep the item with smaller end number
+            const removedItem = curr[1] < next[1] ? next : curr
+            removed.push(removedItem)
+            // if next is not removed assign next to current
+            curr = curr[1] < next[1] ? curr : next
+            next = intervals.shift()
+        } else {
+            // check next two item
+            curr = next
+            next = intervals.shift()
+        }
+    }
+
+    return removed.length
+}
