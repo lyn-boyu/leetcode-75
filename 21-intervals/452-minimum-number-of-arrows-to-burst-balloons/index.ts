@@ -42,5 +42,29 @@ points[i].length == 2
 */
 
 export function findMinArrowShots(points: number[][]): number {
-    return -1
+    // edge cases
+    if (points.length === 0) return 0
+    if (points.length === 1) return 1
+
+    // sort by the end
+    points.sort((a, b) => a[1] - b[1])
+    // inital base cases
+    let currentEnd = points[0][1]
+    let count = 1
+    // inital base cases
+    for (let i = 1; i < points.length; i++) {
+        const next = points[i]
+        const nextStart = next[0]
+
+        if (currentEnd >= nextStart) {
+            // has overlap
+            continue
+        } else {
+            // no overlap
+            currentEnd = next[1]
+            count++
+        }
+    }
+
+    return count
 };
