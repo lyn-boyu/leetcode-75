@@ -34,11 +34,27 @@ stockSpanner.next(85);  // return 6
 */
 
 export class StockSpanner {
-    constructor() {
+    // [span,price]
+    // keep the biggest price on the top
+    stack: [number, number][] = []
 
+    constructor() {
+        this.stack = []
     }
 
     next(price: number): number {
-        return -1
+        let span = 1; // Initialize span for the current price
+
+        // While stack is not empty and the price at the top of the stack is less than or equal to the current price
+        while (this.stack.length > 0 && this.stack[this.stack.length - 1][1] <= price) {
+            // Pop the stack and add the span of the popped element to the current span
+            span += this.stack.pop()![0];
+        }
+
+        // Push the current price and its span onto the stack
+        this.stack.push([span, price]);
+
+        return span; // Return the span for the current price
+
     }
 }

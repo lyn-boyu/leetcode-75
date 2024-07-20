@@ -40,7 +40,7 @@ import { StockSpanner } from './index'
 
 describe("739. Daily Temperatures - Medium", () => {
 
-    test('Input: ["StockSpanner", "next", "next", "next", "next", "next", "next", "next"],[[], [100], [80], [60], [70], [60], [75], [85]]', () => {
+    test('Input1: ["StockSpanner", "next", "next", "next", "next", "next", "next", "next"],[[], [100], [80], [60], [70], [60], [75], [85]]', () => {
         const stockSpanner = new StockSpanner();
         expect(stockSpanner.next(100)).toEqual(1);
         expect(stockSpanner.next(80)).toEqual(1);
