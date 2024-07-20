@@ -31,5 +31,20 @@ Constraints:
 
 
 export function dailyTemperatures(temperatures: number[]): number[] {
-    return []
+    const n = temperatures.length
+    const result = Array.from({ length: n }, () => 0)
+    const stack: number[] = []
+
+    for (let i = 0; i < n; i++) {
+        const currentValue = temperatures[i];
+        // if current value is bigger than the top item of the stack,then pop the idx from stack
+        while (stack.length > 0 && currentValue > temperatures[stack[stack.length - 1]]) {
+            const index = stack.pop()!
+            result[index] = i - index
+        }
+        // push current idx to the stack for next comparison
+        stack.push(i)
+    }
+
+    return result
 };
