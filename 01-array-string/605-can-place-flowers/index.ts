@@ -32,5 +32,33 @@ There are no two adjacent flowers in flowerbed.
 
 
 export function canPlaceFlowers(flowerbed: number[], n: number): boolean {
-    return false
+    let tbd = n;
+
+    for (let i = 0; i < flowerbed.length; i++) {
+        if (tbd === 0) return true
+        if (flowerbed[i] === 0) {
+            const prev = i === 0 ? 0 : flowerbed[i - 1];
+            const next = i === flowerbed.length - 1 ? 0 : flowerbed[i + 1];
+            if (prev === 0 && next === 0) {
+                flowerbed[i] = 1
+                tbd--
+                // skip next element
+                i++
+            }
+        }
+    }
+
+    return tbd === 0
 };
+
+/**
+ 
+# Time Complexity
+The main loop iterates through the flowerbed array once.
+In the worst case, this requires traversing the entire array, 
+which gives a time complexity of O(n), where n is the length of the flowerbed array.
+
+# Space Complexity
+The function uses a few extra variables: tbd, prev, and next. These are all scalar values, so their space complexity is O(1).
+
+*/
