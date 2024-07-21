@@ -45,5 +45,8 @@ n == candies.length
 
 
 export function kidsWithCandies(candies: number[], extraCandies: number): boolean[] {
-    return []
+    const max = Math.max(...candies)
+    return candies.map(current => {
+        return current + extraCandies >= max
+    })
 };
