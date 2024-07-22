@@ -56,4 +56,9 @@ describe("334.- Increasing Triplet Subsequence - Medium", () => {
         expect(increasingTriplet(nums)).toEqual(true);
     });
 
+    test('Input4:  nums = [20,100,10,12,5,13]', () => {
+        const nums = [20, 100, 10, 12, 5, 13]
+        expect(increasingTriplet(nums)).toEqual(true);
+    });
+
 });

@@ -37,5 +37,27 @@ Follow up: Could you implement a solution that runs in O(n) time complexity and 
 
 
 export function increasingTriplet(nums: number[]): boolean {
-    return false
+    // Initialize two variables to track the smallest and second smallest numbers encountered so far
+    let first = Number.MAX_VALUE;
+    let second = Number.MAX_VALUE;
+
+    // Iterate through each number in the array
+    for (let num of nums) {
+        if (num <= first) {
+            // If the current number is smaller than or equal to the smallest number encountered so far,
+            // update 'first' to be this number
+            first = num;
+        } else if (num <= second) {
+            // If the current number is larger than 'first' but smaller than or equal to the second smallest number,
+            // update 'second' to be this number
+            second = num;
+        } else {
+            // If we find a number larger than both 'first' and 'second',
+            // it means we have found an increasing triplet subsequence
+            return true;
+        }
+    }
+
+    // If we complete the loop without finding such a triplet, return false
+    return false;
 };
