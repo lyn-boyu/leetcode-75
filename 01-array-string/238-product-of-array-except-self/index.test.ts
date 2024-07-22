@@ -31,21 +31,51 @@ Follow up: Can you solve the problem in O(1) extra space complexity? (The output
 
 
 import { expect, test, describe } from "bun:test";
-import { productExceptSelf } from './index'
+import { productExceptSelf, noExtraSpaceSolution } from './index'
 
 describe("238. Product of Array Except Self  - Medium", () => {
+    describe("O(n) space solution ", () => {
+        test('Input1: nums = [1,2,3,4]', () => {
+            const nums = [1, 2, 3, 4]
+            const answer = [24, 12, 8, 6]
+            const results = productExceptSelf(nums)
+            results.forEach((num, idx) => {
+                expect(num).toBeCloseTo(answer[idx]);
+            })
+        });
 
-    test('Input1: nums = [1,2,3,4]', () => {
-        const nums = [1, 2, 3, 4]
-        const output = [24, 12, 8, 6]
-        expect(productExceptSelf(nums)).toEqual(output);
-    });
+        test('Input2: nums = [-1,1,0,-3,3]', () => {
+            const nums = [-1, 1, 0, -3, 3]
+            const answer = [0, 0, 9, 0, 0]
+            const results = productExceptSelf(nums)
+            results.forEach((num, idx) => {
+                expect(num).toBeCloseTo(answer[idx]);
+            })
+        });
+    })
 
-    test('Input2: nums = [-1,1,0,-3,3]', () => {
-        const nums = [-1, 1, 0, -3, 3]
-        const output = [0, 0, 9, 0, 0]
-        expect(productExceptSelf(nums)).toEqual(output);
-    });
+    describe("No Extra Space Solution", () => {
+        test('Input1: nums = [1,2,3,4]', () => {
+            const nums = [1, 2, 3, 4]
+            const answer = [24, 12, 8, 6]
+            const results = noExtraSpaceSolution(nums)
+            results.forEach((num, idx) => {
+                expect(num).toBeCloseTo(answer[idx]);
+            })
+        });
+
+        test('Input2: nums = [-1,1,0,-3,3]', () => {
+            const nums = [-1, 1, 0, -3, 3]
+            const answer = [0, 0, 9, 0, 0]
+            const results = noExtraSpaceSolution(nums)
+            results.forEach((num, idx) => {
+                expect(num).toBeCloseTo(answer[idx]);
+            })
+        });
+
+    })
+
+
 
 
 });

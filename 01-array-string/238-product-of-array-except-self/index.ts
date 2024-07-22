@@ -32,5 +32,49 @@ Follow up: Can you solve the problem in O(1) extra space complexity? (The output
 
 
 export function productExceptSelf(nums: number[]): number[] {
-    return []
+    const n = nums.length
+    const answers = new Array(n).fill(1)
+    const rightProducts = new Array(n).fill(1)
+    const leftProducts = new Array(n).fill(1)
+
+    // fill left 
+    let leftProduct = 1
+    for (let i = 0; i < n; i++) {
+        leftProduct = leftProduct * nums[i]
+        leftProducts[i] = leftProduct
+    }
+
+    // fill right 
+    let rightProduct = 1
+    for (let i = n - 1; i >= 0; i--) {
+        rightProduct = rightProduct * nums[i]
+        rightProducts[i] = rightProduct
+    }
+
+    // get answer
+    for (let i = 0; i < n; i++) {
+        answers[i] = (leftProducts[i - 1] ?? 1) * (rightProducts[i + 1] ?? 1)
+    }
+
+    return answers
 };
+
+
+export function noExtraSpaceSolution(nums: number[]): number[] {
+    const n = nums.length
+    const answers = new Array(n).fill(1)
+
+    let left = 1;
+    for (let i = 0; i < n; i++) {
+        answers[i] = left
+        left = left * nums[i]
+    }
+
+    let right = 1;
+    for (let i = n - 1; i >= 0; i--) {
+        answers[i] = right * answers[i]
+        right = right * nums[i]
+    }
+
+    return answers
+}
