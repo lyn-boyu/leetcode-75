@@ -37,8 +37,78 @@ chars[i] is a lowercase English letter, uppercase English letter, digit, or symb
 
 */
 
-
-
 export function compress(chars: string[]): number {
-    return -1
+    let readIndex = 0;  // Index to write the compressed characters
+    let writeIndex = 0; // Index to read the characters
+
+    // Helper function to write the character and its count
+    const writeChar = (char: string, count: number) => {
+        chars[writeIndex++] = char
+        if (count > 1) {
+            for (let num of count.toString()) {
+                chars[writeIndex++] = num
+            }
+        }
+    }
+
+
+    while (readIndex < chars.length) {
+        const currentChar = chars[readIndex];
+        let count = 0
+
+        // Count the number of occurrences of the current character
+        while (readIndex < chars.length && chars[readIndex] === currentChar) {
+            count++
+            readIndex++
+        }
+
+        // Write the character and its count to the array
+        writeChar(currentChar, count)
+    }
+
+
+    // clear extra chars
+    chars.length = writeIndex
+
+    return chars.length
+}
+
+
+export function bruteSolution(chars: string[]): number {
+
+    let prevChar = ''
+    let count = 1;
+    let result = ''
+
+
+    const reset = () => {
+        // if word changed append count and reset  
+        if (prevChar !== '') {
+            // only appent count when count is large than 1
+            if (count > 1) {
+                result += count
+            }
+            count = 1
+        }
+    }
+
+    for (let char of chars) {
+        if (prevChar === char) {
+            count += 1
+        } else {
+            // if word changed append count and reset  
+            reset()
+            // ref cuurent char
+            result += char
+            prevChar = char
+        }
+    }
+
+    reset()
+    chars.length = 0
+    result.split('').forEach(ele => {
+        chars.push(ele)
+    })
+
+    return result.length
 };
