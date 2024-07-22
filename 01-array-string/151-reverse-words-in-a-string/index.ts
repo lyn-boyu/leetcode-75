@@ -40,5 +40,38 @@ Follow-up: If the string data type is mutable in your language, can you solve it
 
 
 export function reverseWords(s: string): string {
-    return ''
+    const words = s.split(' ').filter(s => s.length !== 0)
+
+    let right = words.length - 1
+    let left = 0
+
+    while (left < right) {
+        [words[right], words[left]] = [words[left], words[right]]
+        right--
+        left++
+    }
+
+    return words.join(' ')
 };
+
+// reverse
+export function solution2(s: string): string {
+    return s.trim().split(' ').filter(s => s.length !== 0).reverse().join(' ')
+}
+
+// words need O(n) space: two pointer
+export function solution1(s: string): string {
+    const words = s.trim().split(' ').filter(s => s.length !== 0)
+
+    let right = words.length - 1
+    let left = 0
+
+    while (left < right) {
+        [words[right], words[left]] = [words[left], words[right]]
+        right--
+        left++
+    }
+
+    return words.join(' ')
+};
+
