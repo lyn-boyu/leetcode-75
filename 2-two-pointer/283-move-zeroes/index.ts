@@ -24,13 +24,11 @@ Constraints:
 
 */
 
-/**
- Do not return anything, modify nums in-place instead.
- */
-function moveZeroes(nums: number[]): void {
+/** Do not return anything, modify nums in-place instead. */
+export function moveZeroes(nums: number[]): void {
 
 };
 
 
-export { moveZeroes as solution };
+
 

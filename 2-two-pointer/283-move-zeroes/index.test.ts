@@ -27,20 +27,32 @@ Constraints:
 
 
 import { expect, test, describe } from "bun:test";
-import { solution } from './index'
+import { moveZeroes } from './index'
 
 describe("283. Move Zeroes -  Easy", () => {
 
     test("Input1: nums =  [0,1,0,3,12] ", () => {
         const nums = [0, 1, 0, 3, 12]
-        solution(nums);
-        expect(nums).toBe([1, 3, 12, 0, 0]);
+        moveZeroes(nums);
+        expect(nums).toEqual([1, 3, 12, 0, 0]);
     });
 
     test("Input2: nums = [0] ", () => {
         const nums = [0]
-        solution(nums);
-        expect(nums).toBe([0]);
+        moveZeroes(nums);
+        expect(nums).toEqual([0]);
+    });
+
+    test("Input3: nums = [2,1] ", () => {
+        const nums = [2, 1]
+        moveZeroes(nums);
+        expect(nums).toEqual([2, 1]);
+    });
+
+    test("Input4: nums = [0,0,1] ", () => {
+        const nums = [0, 0, 1]
+        moveZeroes(nums);
+        expect(nums).toEqual([1, 0, 0]);
     });
 
 });
