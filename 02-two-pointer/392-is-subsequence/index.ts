@@ -32,6 +32,20 @@ how would you change your code?
 
 
 export function isSubsequence(s: string, t: string): boolean {
-    return false
+    let tIdx = 0
+    let sIdx = 0;
+
+    // Traverse through both strings
+    while (sIdx < s.length && tIdx < t.length) {
+        // If characters match, move to the next character in s
+        if (s[sIdx] === t[tIdx]) {
+            sIdx++
+        }
+        // Always move to the next character in t
+        tIdx++
+    }
+
+    // If we've matched all characters in s, return true
+    return sIdx === s.length
 };
 
