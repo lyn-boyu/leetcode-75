@@ -48,4 +48,14 @@ describe("392. Is Subsequence - Easy", () => {
         expect(isSubsequence(s, t)).toBe(false);
     });
 
+    test('Input3:  s = "", t = "ahbgdc"', () => {
+        const s = "", t = "ahbgdc"
+        expect(isSubsequence(s, t)).toBe(true);
+    });
+
+    test('Input4:  s = "aaaaaa", t = "bbaaaa"', () => {
+        const s = "aaaaaa", t = "bbaaaa"
+        expect(isSubsequence(s, t)).toBe(false);
+    });
+
 });
