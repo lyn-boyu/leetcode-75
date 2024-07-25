@@ -49,4 +49,13 @@ describe("11. Container With Most Water - Medium", () => {
         expect(maxArea(height)).toBe(1);
     });
 
+    test("Input3: height = [2,3,4,5,18,17,6] ", () => {
+        const height = [2, 3, 4, 5, 18, 17, 6]
+        expect(maxArea(height)).toBe(17);
+    });
+
+    test("Input4: height = [6,4,3,1,4,6,99,62,1,2,6] ", () => {
+        const height = [6, 4, 3, 1, 4, 6, 99, 62, 1, 2, 6]
+        expect(maxArea(height)).toBe(62);
+    });
 });
