@@ -169,7 +169,6 @@ You can set breakpoints in `index.ts` and debug your code for free. Here's how t
 3. Open the command palette with `Ctrl+Shift+P` (`Cmd+Shift+P` on Mac) and select `Bun: Debug`.
 
 
-
 ### 3.4 Branches 🌿
 
 - **problems**: Contains the template with empty solution functions and test cases.
