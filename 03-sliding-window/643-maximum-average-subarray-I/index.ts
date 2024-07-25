@@ -24,7 +24,24 @@ n == nums.length
 */
 
 function findMaxAverage(nums: number[], k: number): number {
-    return 0 as number
+    // Initialize sum and calculate the sum of the first k elements
+    let sum = 0;
+    for (let i = 0; i < k; i++) {
+        sum += nums[i];
+    }
+
+    // Initialize max average with the first k elements' average
+    let maxAvg = sum / k;
+
+    // Slide the window through the array
+    for (let i = k; i < nums.length; i++) {
+        // Update the sum by adding the next element and removing the first element of the previous window
+        sum = sum - nums[i - k] + nums[i];
+        // Calculate the new average and update maxAvg if it's greater
+        maxAvg = Math.max(maxAvg, sum / k);
+    }
+
+    return maxAvg;
 };
 
 
