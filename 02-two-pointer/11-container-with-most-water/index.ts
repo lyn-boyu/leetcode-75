@@ -34,8 +34,36 @@ n == height.length
 
 
 
+
+/**
+
+The key to the two-pointer method is to compare the heights pointed to by the left and right pointers at each step and move the pointer with the smaller height towards the center. 
+This approach gradually narrows the range and helps to find the maximum area.
+
+ */
 export function maxArea(height: number[]): number {
-    return -1
+
+    let left = 0
+    let right = height.length - 1
+    let max = 0
+
+    while (left < right) {
+        const h = Math.min(height[right], height[left])
+        const w = Math.abs(left - right)
+        const area = h * w
+
+        // update the area
+        max = Math.max(max, area)
+
+        // move smaller bar to find bigger result
+        if (height[right] > height[left]) {
+            left++
+        } else {
+            right--
+        }
+    }
+
+    return max
 };
 
 
