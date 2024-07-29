@@ -37,5 +37,18 @@ Follow up: Could you implement a solution that runs in O(n) time complexity and 
 
 
 export function increasingTriplet(nums: number[]): boolean {
+
+    let firstNum = Number.MAX_SAFE_INTEGER
+    let secondNum = Number.MAX_SAFE_INTEGER
+
+    for (let num of nums) {
+        if (num < firstNum) {
+            firstNum = num
+        } else if (num < secondNum) {
+            secondNum = num
+        } else {
+            return true
+        }
+    }
     return false
 };
