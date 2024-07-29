@@ -35,7 +35,24 @@ n == height.length
 
 
 export function maxArea(height: number[]): number {
-    return -1
+    const n = height.length
+    let right = n - 1;
+    let left = 0
+    let maxArea = 0
+
+    for (let i = 0; i < n; i++) {
+        const w = right - left
+        const h = Math.min(height[right], height[left])
+        const area = w * h
+        maxArea = Math.max(area, maxArea)
+
+        if (height[left] > height[right]) {
+            right--
+        } else {
+            left++
+        }
+    }
+    return maxArea
 };
 
 
