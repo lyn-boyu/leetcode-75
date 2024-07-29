@@ -35,5 +35,18 @@ Constraints:
 
 
 export function maxOperations(nums: number[], k: number): number {
-    return -1
+    let count = 0
+    const map = new Map<number, number>()
+
+    for (let num of nums) {
+        const target = k - num
+        if (map.get(target) ?? 0 > 0) {
+            map.set(target, map.get(target)! - 1)
+            count++
+        } else {
+            map.set(num, (map.get(num) ?? 0) + 1)
+        }
+    }
+
+    return count
 };
