@@ -26,7 +26,20 @@ Constraints:
 
 /** Do not return anything, modify nums in-place instead. */
 export function moveZeroes(nums: number[]): void {
+    let lastNonZeroIndex = 0
 
+    //  move all non zero num to the head of the nums
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] !== 0) {
+            nums[lastNonZeroIndex] = nums[i]
+            lastNonZeroIndex++
+        }
+    }
+
+    // change all non zero numbers to zero from lastNonZeroIndex to the end
+    for (let i = lastNonZeroIndex; i < nums.length; i++) {
+        nums[i] = 0
+    }
 };
 
 
