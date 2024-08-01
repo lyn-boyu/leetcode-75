@@ -24,7 +24,26 @@ n == nums.length
 */
 
 function findMaxAverage(nums: number[], k: number): number {
-    return 0 as number
+    let sum = 0
+    let maxAvg = 0;
+    let pointer = 0;
+
+    // build the window
+    for (; pointer < k; pointer++) {
+        sum += nums[pointer]
+    }
+    maxAvg = sum / k
+
+    // slide the window 
+    while (pointer < nums.length) {
+        sum += nums[pointer]
+        sum -= nums[pointer - k];
+        const currentAvg = sum / k
+        maxAvg = Math.max(currentAvg, maxAvg)
+        pointer++
+    }
+
+    return maxAvg
 };
 
 
