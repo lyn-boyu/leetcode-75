@@ -33,6 +33,26 @@ nums[i] is either 0 or 1.
 
 
 function longestSubarray(nums: number[]): number {
-    return 0
+    let right = 0
+    let left = 0
+    let k = 1;
+    let maxCount = 0;
+
+    while (right < nums.length) {
+        if (nums[right] === 0) {
+            k--
+        }
+        // if there is two zero in widdow frame, move window left bundry (narrow the window width) until it meet zero
+        if (k < 0) {
+            if (nums[left] === 0) {
+                k++
+            }
+            left++
+        }
+        maxCount = Math.max(maxCount, right - left)
+        right++
+    }
+
+    return maxCount
 };
 export { longestSubarray as solution };
