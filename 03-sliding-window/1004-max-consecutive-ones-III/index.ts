@@ -27,7 +27,29 @@ nums[i] is either 0 or 1.
 
 
 function longestOnes(nums: number[], k: number): number {
-    return 0 as number
+    let left = 0
+    let right = 0
+
+    while (right < nums.length) {
+        // k-- when nums[right] = 0
+        if (nums[right] === 0) {
+            k--
+        }
+
+        // move left when k is negative 
+        if (k < 0) {
+            if (nums[left] === 0) {
+                k++;
+            }
+            left++
+        }
+
+        right++
+    }
+
+
+
+    return right - left
 };
 
 
