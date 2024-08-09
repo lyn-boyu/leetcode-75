@@ -30,9 +30,43 @@ s consists of lowercase English letters.
 */
 
 
+const isVowel = (l: string) => {
+    return ['a', 'e', 'i', 'o', 'u'].includes(l)
+}
 
 function maxVowels(s: string, k: number): number {
-    return 0 as number
+    let right = 0;
+    let left = 0;
+    let count = 0;
+    let maxCount = 0
+
+    // 1: init window
+    while (right < k) {
+        if (isVowel(s[right])) {
+            count++
+        }
+        right++
+    }
+    maxCount = Math.max(maxCount, count)
+
+    // 2: move window bundries
+    while (right < s.length) {
+
+        if (isVowel(s[left])) {
+            count--
+        }
+
+        if (isVowel(s[right])) {
+            count++
+        }
+
+        maxCount = Math.max(maxCount, count)
+
+        left++
+        right++
+    }
+
+    return maxCount
 };
 
 export { maxVowels as solution };

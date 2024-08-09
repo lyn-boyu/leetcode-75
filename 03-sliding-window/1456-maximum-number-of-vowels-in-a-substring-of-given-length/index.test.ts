@@ -61,4 +61,11 @@ describe("1456. Maximum Number of Vowels in a Substring of Given Length", () => 
         const result = solution(s, k);
         expect(result).toBe(7);
     });
+
+    test("Input5: s = weallloveyou, k = 7 ", () => {
+        const s = "weallloveyou"
+        const k = 7;
+        const result = solution(s, k);
+        expect(result).toBe(4);
+    });
 });
